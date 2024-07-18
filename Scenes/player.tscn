@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1aa2o"]
-[ext_resource type="Texture2D" uid="uid://si7wwdawdxk8" path="res://Sprites/testdummy.png" id="1_4a6li"]
+[ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
 [ext_resource type="Script" path="res://Scripts/Move.gd" id="3_fxjg7"]
 [ext_resource type="Script" path="res://Scripts/PositionClamp.gd" id="4_dxttt"]
 [ext_resource type="Script" path="res://Scripts/Dash.gd" id="5_ais5j"]
@@ -9,11 +9,11 @@
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1aa2o")
-normal_speed = 900.0
-acceleration = 400.0
+normal_speed = 150.0
+acceleration = 70.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4a6li")
+texture = ExtResource("2_q16sa")
 
 [node name="Components" type="Node" parent="."]
 
@@ -35,7 +35,7 @@ sprite = NodePath("../../Sprite2D")
 [node name="Timers" type="Node" parent="."]
 
 [node name="BoostTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 0.75
 one_shot = true
 
 [node name="GhostTimer" type="Timer" parent="Timers"]

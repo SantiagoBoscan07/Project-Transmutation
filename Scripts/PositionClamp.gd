@@ -1,10 +1,10 @@
 extends Node
 @export var body: CharacterBody2D
-@export var margin: = 95
+@export var margin: = 12
 
 var left_border = 0
-var right_border = 1920
-var bottom_border = 1728
+var right_border = 300
+var bottom_border = 337
 var up_border = 0
 
 
