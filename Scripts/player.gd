@@ -1,11 +1,5 @@
-extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+extends CharacterBody2D
+class_name Player
+@export var max_speed = 200.0
+@export var normal_speed = 100.0
+@export var acceleration = 100.0

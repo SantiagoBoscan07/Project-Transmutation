@@ -6,4 +6,16 @@
 
 [node name="Player" parent="." instance=ExtResource("1_07xw1")]
 texture_filter = 1
-position = Vector2(88, 88)
+position = Vector2(864, 1328)
+
+[node name="UI TEST" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel2" type="Panel" parent="UI TEST"]
+layout_mode = 0
+offset_top = 1728.0
+offset_right = 1920.0
+offset_bottom = 1920.0
