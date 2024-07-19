@@ -39,6 +39,7 @@ func _on_dash_timer_timeout():
 	sprite.modulate.a = 1.0
 	player.max_speed = player.normal_speed
 	ghost_timer.stop()
+	Signals.emit_signal("dashCooldownBar", dashCooldown.wait_time)
 	dashCooldown.start()
 
 
