@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=8 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
@@ -6,14 +6,20 @@
 [ext_resource type="Script" path="res://Scripts/PositionClamp.gd" id="4_dxttt"]
 [ext_resource type="Script" path="res://Scripts/Dash.gd" id="5_ais5j"]
 [ext_resource type="PackedScene" uid="uid://chsybfmxi2wbp" path="res://Scenes/Ghost.tscn" id="6_pal8w"]
+[ext_resource type="Script" path="res://Scripts/Shoot.gd" id="7_ie54y"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1aa2o")
 normal_speed = 150.0
 acceleration = 70.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("2_q16sa")
+
+[node name="ShootPoint" type="Marker2D" parent="Body"]
+position = Vector2(0, -19)
 
 [node name="Components" type="Node" parent="."]
 
@@ -30,7 +36,13 @@ script = ExtResource("5_ais5j")
 player = NodePath("../..")
 boostTimer = NodePath("../../Timers/BoostTimer")
 ghost_node = ExtResource("6_pal8w")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../Body/Sprite2D")
+
+[node name="Shoot" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "shootPoint", "shootTimer")]
+script = ExtResource("7_ie54y")
+player = NodePath("../..")
+shootPoint = NodePath("../../Body/ShootPoint")
+shootTimer = NodePath("../../Timers/ShootTimer")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -41,5 +53,10 @@ one_shot = true
 [node name="GhostTimer" type="Timer" parent="Timers"]
 wait_time = 0.15
 
+[node name="ShootTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
 [connection signal="timeout" from="Timers/BoostTimer" to="Components/Dash" method="_on_boost_timer_timeout"]
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="Timers/ShootTimer" to="Components/Shoot" method="_on_shoot_timer_timeout"]

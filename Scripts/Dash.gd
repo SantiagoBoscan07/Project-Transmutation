@@ -10,8 +10,8 @@ var boostSpeed
 var ghost
 
 
-func _input(event):
-	if event.is_action_pressed("dash") and canDash:
+func _physics_process(delta):
+	if Input.is_action_pressed("dash") and canDash:
 		boost()
 
 

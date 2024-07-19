@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://chjsf7ikduc2h"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerProjectile.gd" id="1_fwvic"]
+[ext_resource type="Texture2D" uid="uid://dd31l0uhnehwq" path="res://Sprites/bullet.png" id="2_246j3"]
+
+[node name="PlayerProjectile" type="Node2D"]
+script = ExtResource("1_fwvic")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_246j3")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Body"]
+enable_node_path = NodePath("../..")
+
+[connection signal="screen_exited" from="Body/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
