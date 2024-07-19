@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://c18joa412x5n3"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_1aa2o"]
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
-[ext_resource type="Script" path="res://Scripts/Move.gd" id="3_fxjg7"]
-[ext_resource type="Script" path="res://Scripts/PositionClamp.gd" id="4_dxttt"]
-[ext_resource type="Script" path="res://Scripts/Dash.gd" id="5_ais5j"]
-[ext_resource type="PackedScene" uid="uid://chsybfmxi2wbp" path="res://Scenes/Ghost.tscn" id="6_pal8w"]
-[ext_resource type="Script" path="res://Scripts/Shoot.gd" id="7_ie54y"]
+[ext_resource type="Script" path="res://Scripts/Player/Move.gd" id="3_fxjg7"]
+[ext_resource type="Script" path="res://Scripts/Player/PositionClamp.gd" id="4_dxttt"]
+[ext_resource type="Script" path="res://Scripts/Player/Dash.gd" id="5_ais5j"]
+[ext_resource type="PackedScene" uid="uid://chsybfmxi2wbp" path="res://Scenes/Player/Ghost.tscn" id="6_pal8w"]
+[ext_resource type="Script" path="res://Scripts/Player/Shoot.gd" id="7_ie54y"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1aa2o")
@@ -31,10 +31,11 @@ player = NodePath("../..")
 script = ExtResource("4_dxttt")
 body = NodePath("../..")
 
-[node name="Dash" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "boostTimer", "sprite")]
+[node name="Dash" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "dashTimer", "dashCooldown", "sprite")]
 script = ExtResource("5_ais5j")
 player = NodePath("../..")
-boostTimer = NodePath("../../Timers/BoostTimer")
+dashTimer = NodePath("../../Timers/DashTimer")
+dashCooldown = NodePath("../../Timers/DashCooldown")
 ghost_node = ExtResource("6_pal8w")
 sprite = NodePath("../../Body/Sprite2D")
 
@@ -46,7 +47,7 @@ shootTimer = NodePath("../../Timers/ShootTimer")
 
 [node name="Timers" type="Node" parent="."]
 
-[node name="BoostTimer" type="Timer" parent="Timers"]
+[node name="DashTimer" type="Timer" parent="Timers"]
 wait_time = 0.75
 one_shot = true
 
@@ -57,6 +58,11 @@ wait_time = 0.15
 wait_time = 0.15
 one_shot = true
 
-[connection signal="timeout" from="Timers/BoostTimer" to="Components/Dash" method="_on_boost_timer_timeout"]
+[node name="DashCooldown" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timers/DashTimer" to="Components/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="Timers/ShootTimer" to="Components/Shoot" method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="Timers/DashCooldown" to="Components/Dash" method="_on_dash_cooldown_timeout"]

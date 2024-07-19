@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://birnguoyjjy7o"]
+
+[ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_u564h"]
+[ext_resource type="Texture2D" uid="uid://cpsta6m3oejp8" path="res://Sprites/progressbar.png" id="2_lccqp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
+bg_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+
+[node name="Test" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_u564h")]
+texture_filter = 1
+position = Vector2(146, 284)
+
+[node name="UI TEST" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel2" type="Panel" parent="UI TEST"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfhqw")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI TEST/Panel2"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+value = 100.0
+fill_mode = 4
+texture_progress = ExtResource("2_lccqp")
+tint_progress = Color(0.101961, 0.0627451, 0.0862745, 1)

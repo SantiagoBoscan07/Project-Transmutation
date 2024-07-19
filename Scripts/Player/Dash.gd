@@ -1,7 +1,8 @@
 extends Node2D
 class_name dashPlayerComponent
 @export var player: CharacterBody2D
-@export var boostTimer: Timer
+@export var dashTimer: Timer
+@export var dashCooldown: Timer
 @export var ghost_node: PackedScene
 @export var sprite: Sprite2D
 @onready var ghost_timer = $"../../Timers/GhostTimer"
@@ -21,7 +22,7 @@ func boost():
 	boostSpeed = player.max_speed * 2
 	player.max_speed = boostSpeed
 	canDash = false
-	boostTimer.start()
+	dashTimer.start()
 
 
 func add_ghost():
@@ -30,12 +31,16 @@ func add_ghost():
 	get_tree().current_scene.add_child(ghost)
 
 
-func _on_boost_timer_timeout():
-	sprite.modulate.a = 1.0
-	player.max_speed = player.normal_speed
-	canDash = true
-	ghost_timer.stop()
-
-
 func _on_ghost_timer_timeout():
 	add_ghost()
+
+
+func _on_dash_timer_timeout():
+	sprite.modulate.a = 1.0
+	player.max_speed = player.normal_speed
+	ghost_timer.stop()
+	dashCooldown.start()
+
+
+func _on_dash_cooldown_timeout():
+	canDash = true

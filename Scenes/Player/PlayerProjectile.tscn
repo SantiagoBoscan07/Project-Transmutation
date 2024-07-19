@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://chjsf7ikduc2h"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerProjectile.gd" id="1_fwvic"]
-[ext_resource type="Texture2D" uid="uid://dd31l0uhnehwq" path="res://Sprites/bullet.png" id="2_246j3"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerProjectile.gd" id="1_i8bhn"]
+[ext_resource type="Texture2D" uid="uid://dd31l0uhnehwq" path="res://Sprites/bullet.png" id="2_jdvby"]
 
 [node name="PlayerProjectile" type="Node2D"]
-script = ExtResource("1_fwvic")
+script = ExtResource("1_i8bhn")
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_246j3")
+texture = ExtResource("2_jdvby")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Body"]
 enable_node_path = NodePath("../..")
