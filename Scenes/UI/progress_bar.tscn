@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cpsta6m3oejp8" path="res://Sprites/progressbar.png" id="2_kkirt"]
 [ext_resource type="Texture2D" uid="uid://bldt34io578s0" path="res://Sprites/dashicon.png" id="3_pviyw"]
 
-[node name="ProgressBar" type="Control" node_paths=PackedStringArray("progressBar", "progressTimer")]
+[node name="ProgressBar" type="Control" node_paths=PackedStringArray("progressBar", "progressTimer", "updateTimer")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -12,6 +12,7 @@ offset_bottom = 40.0
 script = ExtResource("1_yphj7")
 progressBar = NodePath("TextureProgressBar")
 progressTimer = NodePath("ProgressTime")
+updateTimer = NodePath("UpdateTimer")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
@@ -29,4 +30,8 @@ one_shot = true
 position = Vector2(16, 16)
 texture = ExtResource("3_pviyw")
 
+[node name="UpdateTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="ProgressTime" to="." method="_on_progress_time_timeout"]
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]

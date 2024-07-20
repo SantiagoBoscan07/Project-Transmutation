@@ -5,7 +5,9 @@ class_name dashPlayerComponent
 @export var dashCooldown: Timer
 @export var ghost_node: PackedScene
 @export var sprite: Sprite2D
-@onready var ghost_timer = $"../../Timers/GhostTimer"
+@export var ghost_timer: Timer
+@export var hurtboxLight: Area2D
+@export var hurtboxShadow: Area2D
 var canDash: bool = true
 var boostSpeed
 var ghost
@@ -17,11 +19,13 @@ func _physics_process(delta):
 
 
 func boost():
+	hurtboxLight.is_invicible = true
 	sprite.modulate.a = 150.0 / 250.0
 	ghost_timer.start()
 	boostSpeed = player.max_speed * 2
 	player.max_speed = boostSpeed
 	canDash = false
+	Signals.emit_signal("dashBar", dashTimer.wait_time)
 	dashTimer.start()
 
 
@@ -36,6 +40,7 @@ func _on_ghost_timer_timeout():
 
 
 func _on_dash_timer_timeout():
+	hurtboxLight.is_invicible = false
 	sprite.modulate.a = 1.0
 	player.max_speed = player.normal_speed
 	ghost_timer.stop()

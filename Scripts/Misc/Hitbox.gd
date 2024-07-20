@@ -1,7 +1,7 @@
 extends Area2D
 class_name Hitbox
 
-@export var damage = 1.0
+@export var damage = 1
 
 signal hit_hurtbox(hurtbox)
 

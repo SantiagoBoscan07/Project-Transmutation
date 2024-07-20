@@ -41,13 +41,16 @@ player = NodePath("../..")
 script = ExtResource("4_dxttt")
 body = NodePath("../..")
 
-[node name="Dash" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "dashTimer", "dashCooldown", "sprite")]
+[node name="Dash" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "dashTimer", "dashCooldown", "sprite", "ghost_timer", "hurtboxLight", "hurtboxShadow")]
 script = ExtResource("5_ais5j")
 player = NodePath("../..")
 dashTimer = NodePath("../../Timers/DashTimer")
 dashCooldown = NodePath("../../Timers/DashCooldown")
 ghost_node = ExtResource("6_pal8w")
 sprite = NodePath("../../Body/Sprite2D")
+ghost_timer = NodePath("../../Timers/GhostTimer")
+hurtboxLight = NodePath("../../Areas/HurtboxLight")
+hurtboxShadow = NodePath("../../Areas/HurtboxShadow")
 
 [node name="Shoot" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "shootPoint", "shootTimer")]
 script = ExtResource("7_ie54y")
@@ -82,15 +85,6 @@ one_shot = true
 
 [node name="Areas" type="Node2D" parent="."]
 
-[node name="HurtboxLight" type="Area2D" parent="Areas"]
-collision_mask = 0
-script = ExtResource("9_dstq1")
-
-[node name="Hurtbox" type="CollisionShape2D" parent="Areas/HurtboxLight"]
-visible = false
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_h00vk")
-
 [node name="HurtboxShadow" type="Area2D" parent="Areas"]
 process_mode = 4
 collision_layer = 2
@@ -102,7 +96,17 @@ visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_h00vk")
 
+[node name="HurtboxLight" type="Area2D" parent="Areas"]
+collision_mask = 0
+script = ExtResource("9_dstq1")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Areas/HurtboxLight"]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_h00vk")
+
 [node name="Hitbox" type="Area2D" parent="Areas"]
+process_mode = 4
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("10_saexv")
