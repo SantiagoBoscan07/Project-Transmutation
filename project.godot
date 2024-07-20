@@ -63,6 +63,13 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player_light_hurtbox"
+2d_physics/layer_2="player_shadow_hurtbox"
+2d_physics/layer_3="enemy_hurtbox"
+2d_physics/layer_4="item_hurtbox"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
