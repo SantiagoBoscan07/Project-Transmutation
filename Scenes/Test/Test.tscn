@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://birnguoyjjy7o"]
+[gd_scene load_steps=6 format=3 uid="uid://birnguoyjjy7o"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_u564h"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_yt58w"]
+[ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="3_jjn2o"]
+[ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="3_y33hk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.192157, 0.486275, 0.529412, 1)
@@ -26,3 +28,15 @@ offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qfhqw")
 
 [node name="ProgressBar" parent="UI TEST/Panel2" instance=ExtResource("2_yt58w")]
+
+[node name="FPS" type="RichTextLabel" parent="UI TEST/Panel2"]
+layout_mode = 0
+offset_left = 238.0
+offset_right = 299.0
+offset_bottom = 31.0
+script = ExtResource("3_jjn2o")
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("3_y33hk")]
+position = Vector2(144, 137)
+alpha = 2.8
+spawnTime = 0.08
