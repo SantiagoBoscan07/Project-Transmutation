@@ -38,5 +38,5 @@ script = ExtResource("3_jjn2o")
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("3_y33hk")]
 position = Vector2(144, 137)
-alpha = 2.8
-spawnTime = 0.08
+alpha = 1.3
+spawnTime = 0.04

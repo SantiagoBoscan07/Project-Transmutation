@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=15 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Health.gd" id="8_tejuy"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hurt.gd" id="9_buh61"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hurtbox.gd" id="9_dstq1"]
+[ext_resource type="Script" path="res://Scripts/Misc/Flash.gd" id="10_iybpp"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hitbox.gd" id="10_saexv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h00vk"]
@@ -60,11 +61,16 @@ shootTimer = NodePath("../../Timers/ShootTimer")
 
 [node name="Health" type="Node" parent="Components"]
 script = ExtResource("8_tejuy")
+health = 2
 
 [node name="Hurt" type="Node" parent="Components" node_paths=PackedStringArray("health", "hurtbox")]
 script = ExtResource("9_buh61")
 health = NodePath("../Health")
 hurtbox = NodePath("../../Areas/HurtboxLight")
+
+[node name="Flash" type="Node" parent="Components" node_paths=PackedStringArray("sprite")]
+script = ExtResource("10_iybpp")
+sprite = NodePath("../../Body/Sprite2D")
 
 [node name="Timers" type="Node" parent="."]
 
