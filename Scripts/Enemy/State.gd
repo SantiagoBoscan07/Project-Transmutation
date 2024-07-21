@@ -26,6 +26,5 @@ func transition():
 
 func _physics_process(delta):
 	if can_transition:
-		print("Transition")
 		transition()
 	debug.text = name

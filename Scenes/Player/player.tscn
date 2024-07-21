@@ -62,7 +62,7 @@ shootTimer = NodePath("../../Timers/ShootTimer")
 
 [node name="Health" type="Node" parent="Components"]
 script = ExtResource("8_tejuy")
-health = 2
+health = 100
 
 [node name="Hurt" type="Node" parent="Components" node_paths=PackedStringArray("health", "hurtbox")]
 script = ExtResource("9_buh61")

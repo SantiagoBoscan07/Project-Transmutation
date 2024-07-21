@@ -8,5 +8,4 @@ class_name Hurt
 func _ready() -> void:
 	hurtbox.hurt.connect(func(hitbox: Hitbox):
 		health.health -= hitbox.damage
-		print(health.health)
 )

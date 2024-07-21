@@ -1,18 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbp67xw10qpno"]
+[gd_scene load_steps=14 format=3 uid="uid://dbp67xw10qpno"]
 
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="1_6k4t3"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.gd" id="1_gidfm"]
 [ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="1_mogy1"]
 [ext_resource type="Texture2D" uid="uid://cnn1dw3c645gp" path="res://Sprites/mcdraft2.png" id="2_455ju"]
 [ext_resource type="Script" path="res://Scripts/Enemy/StateMachine.gd" id="4_w18q4"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Phase.gd" id="5_g5ahm"]
 [ext_resource type="Script" path="res://Scripts/Enemy/enemyMove.gd" id="6_ywbba"]
+[ext_resource type="Script" path="res://Scripts/Misc/Hitbox.gd" id="7_8xrab"]
+[ext_resource type="Script" path="res://Scripts/Misc/Health.gd" id="7_fij3j"]
+[ext_resource type="Script" path="res://Scripts/Misc/Hurt.gd" id="8_4lywe"]
+[ext_resource type="Script" path="res://Scripts/Misc/Hurtbox.gd" id="8_b0dsm"]
+[ext_resource type="Script" path="res://Scripts/Misc/Flash.gd" id="10_6vsgs"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1kpk"]
+radius = 11.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox", "flash")]
+z_index = 2
+script = ExtResource("1_gidfm")
+health = NodePath("Component/Health")
+hurtbox = NodePath("Areas/Hurtbox")
+flash = NodePath("Component/Flash")
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
-z_index = 2
 texture = ExtResource("2_455ju")
 
 [node name="Idle" type="Node2D" parent="Body" node_paths=PackedStringArray("sprite")]
@@ -67,3 +80,37 @@ one_shot = true
 [node name="Move" type="Node2D" parent="Component" node_paths=PackedStringArray("body")]
 script = ExtResource("6_ywbba")
 body = NodePath("../..")
+
+[node name="Health" type="Node" parent="Component"]
+script = ExtResource("7_fij3j")
+health = 10
+
+[node name="Hurt" type="Node" parent="Component" node_paths=PackedStringArray("health", "hurtbox")]
+script = ExtResource("8_4lywe")
+health = NodePath("../Health")
+hurtbox = NodePath("../../Areas/Hurtbox")
+
+[node name="Flash" type="Node" parent="Component" node_paths=PackedStringArray("sprite")]
+script = ExtResource("10_6vsgs")
+sprite = NodePath("../../Body/Sprite2D")
+
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="Areas"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("7_8xrab")
+damage = 9999
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_x1kpk")
+
+[node name="Hurtbox" type="Area2D" parent="Areas"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("8_b0dsm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Hurtbox"]
+visible = false
+shape = SubResource("CircleShape2D_x1kpk")
