@@ -2,14 +2,13 @@ extends Node2D
 
 @export var enemyProjectilePreload: PackedScene
 @export_range(0,2*PI) var alpha: float = 0.0
-@export var spawnTime: float = 1.0
 @export var spawnTimer: Timer
+@export var spawnTime: float = 0.0:
+	set(value):
+		spawnTime = value
+		spawnTimer.wait_time = spawnTime
 var theta: float = 0.0
 var enemyProjectile
-
-func _ready():
-	spawnTimer.wait_time = spawnTime
-	$Sprite2D.hide()
 
 func getVector(angle):
 	theta = angle + alpha

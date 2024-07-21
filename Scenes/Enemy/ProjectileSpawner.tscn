@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://chdoe7miagnvq"]
+[gd_scene load_steps=3 format=3 uid="uid://chdoe7miagnvq"]
 
-[ext_resource type="Texture2D" uid="uid://cpsta6m3oejp8" path="res://Sprites/progressbar.png" id="1_2ayym"]
 [ext_resource type="Script" path="res://Scripts/Enemy/enemyprojectilespawner.gd" id="1_rkhdh"]
 [ext_resource type="PackedScene" uid="uid://cige4n3p5oet7" path="res://Scenes/Enemy/EnemyProjectile.tscn" id="2_oay3s"]
 
@@ -9,12 +8,7 @@ script = ExtResource("1_rkhdh")
 enemyProjectilePreload = ExtResource("2_oay3s")
 spawnTimer = NodePath("SpawnTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2ayym")
-
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
-
-[node name="Duration" type="Timer" parent="."]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

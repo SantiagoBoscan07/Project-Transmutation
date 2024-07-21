@@ -19,6 +19,7 @@ func update_value(time):
 	fillTime = time
 	updateTimer.start()
 
+
 func cooldown_value(time):
 	show()
 	progressBar.value = 100
