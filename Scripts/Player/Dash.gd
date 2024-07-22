@@ -4,7 +4,8 @@ class_name dashPlayerComponent
 @export var dashTimer: Timer
 @export var dashCooldown: Timer
 @export var ghost_node: PackedScene
-@export var sprite: Sprite2D
+@export var lightSprite: Sprite2D
+@export var shadowSprite: Sprite2D
 @export var ghost_timer: Timer
 @export var hurtboxLight: Area2D
 @export var hurtboxShadow: Area2D
@@ -21,7 +22,10 @@ func _physics_process(delta):
 func boost():
 	hurtboxLight.is_invicible = true
 	hurtboxShadow.is_invicible = true
-	sprite.modulate.a = 150.0 / 250.0
+	if ModeManager.current_mode == 0:
+		lightSprite.modulate.a = 150.0 / 250.0
+	elif ModeManager.current_mode == 1:
+		shadowSprite.modulate.a = 150.0 / 250.0
 	ghost_timer.start()
 	boostSpeed = player.max_speed * 2
 	player.max_speed = boostSpeed
@@ -31,9 +35,14 @@ func boost():
 
 
 func add_ghost():
-	ghost = ghost_node.instantiate()
-	ghost.set_property(player.global_position, sprite.scale)
-	get_tree().current_scene.add_child(ghost)
+	if ModeManager.current_mode == 0:
+		ghost = ghost_node.instantiate()
+		ghost.set_property(player.global_position, lightSprite.scale)
+		get_tree().current_scene.add_child(ghost)
+	elif ModeManager.current_mode == 1:
+		ghost = ghost_node.instantiate()
+		ghost.set_property(player.global_position, shadowSprite.scale)
+		get_tree().current_scene.add_child(ghost)
 
 
 func _on_ghost_timer_timeout():
@@ -45,7 +54,8 @@ func _on_dash_timer_timeout():
 		ModeManager.mode_switch.emit(0)
 	elif ModeManager.current_mode == 1:
 		ModeManager.mode_switch.emit(1)
-	sprite.modulate.a = 1.0
+	lightSprite.modulate.a = 1.0
+	shadowSprite.modulate.a = 1.0
 	player.max_speed = player.normal_speed
 	ghost_timer.stop()
 	Signals.emit_signal("dashCooldownBar", dashCooldown.wait_time)

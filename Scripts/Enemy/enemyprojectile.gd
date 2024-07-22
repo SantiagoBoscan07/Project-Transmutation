@@ -1,5 +1,8 @@
 extends Area2D
 
+var isShadow: bool = true:
+	set(value):
+		isShadow = value
 var speed = 100
 var direction = Vector2.RIGHT
 
