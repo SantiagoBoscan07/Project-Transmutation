@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=16 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Flash.gd" id="10_iybpp"]
 [ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="11_lwfiv"]
 [ext_resource type="Script" path="res://Scenes/Player/HurtboxSwitch.gd" id="13_6fhlb"]
-[ext_resource type="Script" path="res://Scripts/Misc/ModeManager.gd" id="14_kd0ax"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h00vk"]
 radius = 6.0
@@ -65,7 +64,12 @@ shootTimer = NodePath("../../Timers/ShootTimer")
 script = ExtResource("8_tejuy")
 health = 100
 
-[node name="Hurt" type="Node" parent="Components" node_paths=PackedStringArray("health", "hurtbox")]
+[node name="ShadowHurt" type="Node" parent="Components" node_paths=PackedStringArray("health", "hurtbox")]
+script = ExtResource("9_buh61")
+health = NodePath("../Health")
+hurtbox = NodePath("../../Areas/HurtboxShadow")
+
+[node name="LightHurt" type="Node" parent="Components" node_paths=PackedStringArray("health", "hurtbox")]
 script = ExtResource("9_buh61")
 health = NodePath("../Health")
 hurtbox = NodePath("../../Areas/HurtboxLight")
@@ -125,14 +129,10 @@ visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7hbsw")
 
-[node name="HurtboxManager" type="Node2D" parent="Areas" node_paths=PackedStringArray("modeManager", "lightHurtbox", "shadowHurtbox")]
+[node name="HurtboxManager" type="Node2D" parent="Areas" node_paths=PackedStringArray("lightHurtbox", "shadowHurtbox")]
 script = ExtResource("13_6fhlb")
-modeManager = NodePath("../ModeManager")
 lightHurtbox = NodePath("../HurtboxLight")
 shadowHurtbox = NodePath("../HurtboxShadow")
-
-[node name="ModeManager" type="Node" parent="Areas"]
-script = ExtResource("14_kd0ax")
 
 [connection signal="timeout" from="Timers/DashTimer" to="Components/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]

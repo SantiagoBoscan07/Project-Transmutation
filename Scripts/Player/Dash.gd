@@ -20,6 +20,7 @@ func _physics_process(delta):
 
 func boost():
 	hurtboxLight.is_invicible = true
+	hurtboxShadow.is_invicible = true
 	sprite.modulate.a = 150.0 / 250.0
 	ghost_timer.start()
 	boostSpeed = player.max_speed * 2
@@ -40,7 +41,10 @@ func _on_ghost_timer_timeout():
 
 
 func _on_dash_timer_timeout():
-	hurtboxLight.is_invicible = false
+	if ModeManager.current_mode == 0:
+		ModeManager.mode_switch.emit(0)
+	elif ModeManager.current_mode == 1:
+		ModeManager.mode_switch.emit(1)
 	sprite.modulate.a = 1.0
 	player.max_speed = player.normal_speed
 	ghost_timer.stop()
