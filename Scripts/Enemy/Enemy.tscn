@@ -68,6 +68,7 @@ alpha = 1.8
 spawnTime = 0.03
 nextPhase = NodePath("../FirstPhase")
 move = NodePath("../../Component/Move")
+isShadow = true
 
 [node name="Timer" type="Node2D" parent="."]
 

@@ -9,6 +9,9 @@ extends Node2D
 		spawnTimer.wait_time = spawnTime
 var theta: float = 0.0
 var enemyProjectile
+@export var isShadow: bool = false:
+	set(value):
+		isShadow = value
 
 func getVector(angle):
 	theta = angle + alpha
@@ -16,7 +19,7 @@ func getVector(angle):
 
 func shoot(angle):
 	enemyProjectile = enemyProjectilePreload.instantiate()
-	
+	enemyProjectile.isShadow = isShadow
 	enemyProjectile.position = global_position
 	enemyProjectile.direction = getVector(angle)
 	get_tree().current_scene.call_deferred("add_child", enemyProjectile)
