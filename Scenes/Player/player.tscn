@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=17 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
@@ -11,8 +11,9 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Hurt.gd" id="9_buh61"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hurtbox.gd" id="9_dstq1"]
 [ext_resource type="Script" path="res://Scripts/Misc/Flash.gd" id="10_iybpp"]
-[ext_resource type="Script" path="res://Scripts/Misc/Hitbox.gd" id="10_saexv"]
 [ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="11_lwfiv"]
+[ext_resource type="Script" path="res://Scenes/Player/HurtboxSwitch.gd" id="13_6fhlb"]
+[ext_resource type="Script" path="res://Scripts/Misc/ModeManager.gd" id="14_kd0ax"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h00vk"]
 radius = 6.0
@@ -97,7 +98,6 @@ one_shot = true
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="HurtboxShadow" type="Area2D" parent="Areas"]
-process_mode = 4
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("9_dstq1")
@@ -116,17 +116,6 @@ visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_h00vk")
 
-[node name="Hitbox" type="Area2D" parent="Areas"]
-process_mode = 4
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("10_saexv")
-
-[node name="Hitbox" type="CollisionShape2D" parent="Areas/Hitbox"]
-visible = false
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_h00vk")
-
 [node name="ItemDetector" type="Area2D" parent="Areas"]
 collision_layer = 8
 collision_mask = 0
@@ -135,6 +124,15 @@ collision_mask = 0
 visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7hbsw")
+
+[node name="HurtboxManager" type="Node2D" parent="Areas" node_paths=PackedStringArray("modeManager", "lightHurtbox", "shadowHurtbox")]
+script = ExtResource("13_6fhlb")
+modeManager = NodePath("../ModeManager")
+lightHurtbox = NodePath("../HurtboxLight")
+shadowHurtbox = NodePath("../HurtboxShadow")
+
+[node name="ModeManager" type="Node" parent="Areas"]
+script = ExtResource("14_kd0ax")
 
 [connection signal="timeout" from="Timers/DashTimer" to="Components/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]
