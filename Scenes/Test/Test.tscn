@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="4_ar7vd"]
 [ext_resource type="PackedScene" uid="uid://dbp67xw10qpno" path="res://Scripts/Enemy/Enemy.tscn" id="5_4olau"]
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rleoa"]
-[ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/itemFire.tscn" id="7_iyk06"]
+[ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="7_iyk06"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.196078)
@@ -77,6 +77,18 @@ position = Vector2(142, 92)
 
 [node name="Item" parent="." instance=ExtResource("7_iyk06")]
 position = Vector2(146, 199)
+currentItemType = 3
+
+[node name="Item2" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(63, 155)
+currentItemType = 2
+
+[node name="Item3" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(214, 160)
+
+[node name="Item4" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(55, 252)
+currentItemType = 1
 
 [node name="FPS" type="RichTextLabel" parent="."]
 offset_left = 239.0
