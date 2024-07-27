@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cloioldvlrxah" path="res://Sprites/dashiconfr.png" id="3_x34ug"]
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_yv8hd"]
 
-[node name="ProgressBar" type="Control" node_paths=PackedStringArray("progressBar", "progressTimer", "updateTimer")]
+[node name="ProgressBar" type="Control" node_paths=PackedStringArray("progressBar", "progressTimer", "updateTimer", "label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -14,6 +14,7 @@ script = ExtResource("1_yphj7")
 progressBar = NodePath("TextureProgressBar")
 progressTimer = NodePath("ProgressTime")
 updateTimer = NodePath("UpdateTimer")
+label = NodePath("Label")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
@@ -37,14 +38,14 @@ one_shot = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = -5.0
-offset_top = 21.0
-offset_right = 43.0
-offset_bottom = 47.0
+offset_left = -10.0
+offset_top = 29.0
+offset_right = 55.0
+offset_bottom = 42.0
 theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
 theme_override_fonts/font = ExtResource("4_yv8hd")
-theme_override_font_sizes/font_size = 32
-text = "Dash"
+theme_override_font_sizes/font_size = 16
+text = "Dash: Shift"
 
 [connection signal="timeout" from="ProgressTime" to="." method="_on_progress_time_timeout"]
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
