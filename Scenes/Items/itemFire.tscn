@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkshbhow8ihs1"]
+
+[ext_resource type="Texture2D" uid="uid://dmjns00y66vms" path="res://Sprites/items1.png" id="1_8mwtg"]
+[ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="2_s42y5"]
+[ext_resource type="Script" path="res://Scripts/Items/itemBehavior.gd" id="3_1fmqs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ohy2d"]
+radius = 17.0294
+
+[node name="Item" type="Node2D"]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Fire" type="Sprite2D" parent="Body"]
+texture = ExtResource("1_8mwtg")
+
+[node name="Idle" type="Node2D" parent="Body" node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_s42y5")
+sprite = NodePath("../Fire")
+speed = 1.0
+
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="Areas"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Hurtbox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ohy2d")
+
+[node name="Component" type="Node" parent="."]
+
+[node name="ItemBehavior" type="Node2D" parent="Component" node_paths=PackedStringArray("sprite", "idle", "hurtbox")]
+script = ExtResource("3_1fmqs")
+sprite = NodePath("../../Body/Fire")
+idle = NodePath("../../Body/Idle")
+hurtbox = NodePath("../../Areas/Hurtbox")

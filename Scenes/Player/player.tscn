@@ -53,6 +53,7 @@ player = NodePath("../..")
 [node name="PositionClamp" type="Node" parent="Components" node_paths=PackedStringArray("body")]
 script = ExtResource("4_dxttt")
 body = NodePath("../..")
+margin = 16
 
 [node name="Dash" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "dashTimer", "dashCooldown", "lightSprite", "shadowSprite", "ghost_timer", "hurtboxLight", "hurtboxShadow")]
 script = ExtResource("5_ais5j")
@@ -109,7 +110,7 @@ wait_time = 0.75
 one_shot = true
 
 [node name="GhostTimer" type="Timer" parent="Timers"]
-wait_time = 0.15
+wait_time = 0.1
 
 [node name="ShootTimer" type="Timer" parent="Timers"]
 wait_time = 0.15

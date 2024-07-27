@@ -27,6 +27,7 @@ ModeManager="*res://Scripts/Misc/ModeManager.gd"
 
 window/size/viewport_width=300
 window/size/viewport_height=350
+window/size/mode=2
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"

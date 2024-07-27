@@ -1,8 +1,9 @@
 extends Node2D
 class_name Idle
 @export var sprite: Sprite2D
-var up_tween
-var down_tween
+@export var speed: float = 0.5
+var upTween
+var downTween
 
 func _ready():
 	up()
@@ -10,17 +11,17 @@ func _ready():
 
 
 func up():
-	up_tween = get_tree().create_tween()
-	up_tween.tween_property(sprite, "position",  Vector2(0,2),0.5)
-	up_tween.connect("finished", on_up_tween_finished)
+	upTween = get_tree().create_tween()
+	upTween.tween_property(sprite, "position",  Vector2(0,2),speed)
+	upTween.connect("finished", oUpTweenFinished)
 
-func on_up_tween_finished():
+func oUpTweenFinished():
 	down()
 
 func down():
-	down_tween = get_tree().create_tween()
-	down_tween.tween_property(sprite, "position",  Vector2(0,-2),0.5)
-	down_tween.connect("finished", on_down_tween_finished)
+	downTween = get_tree().create_tween()
+	downTween.tween_property(sprite, "position",  Vector2(0,-2),speed)
+	downTween.connect("finished", onDownTweenFinished)
 
-func on_down_tween_finished():
+func onDownTweenFinished():
 	up()
