@@ -66,6 +66,7 @@ horizontal_alignment = 1
 [node name="ElementManager" parent="UI TEST/Panel2" instance=ExtResource("5_rleoa")]
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("3_y33hk")]
+process_mode = 4
 position = Vector2(20, 85)
 spawnTime = 0.01
 
@@ -81,37 +82,9 @@ currentItemType = 3
 position = Vector2(111, 158)
 currentItemType = 2
 
-[node name="Item3" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(53, 162)
-
-[node name="Item4" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(55, 203)
-currentItemType = 1
-
 [node name="FPS" type="RichTextLabel" parent="."]
 offset_left = 239.0
 offset_top = 2.0
 offset_right = 300.0
 offset_bottom = 33.0
 script = ExtResource("3_jjn2o")
-
-[node name="Item5" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(201, 159)
-
-[node name="Item6" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(206, 207)
-
-[node name="Item7" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(260, 157)
-currentItemType = 2
-
-[node name="Item8" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(259, 208)
-currentItemType = 1
-
-[node name="Item9" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(158, 162)
-
-[node name="Item10" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(154, 205)
-currentItemType = 1
