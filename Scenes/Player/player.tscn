@@ -90,6 +90,12 @@ texture = ExtResource("4_4muqa")
 [node name="ShootPoint" type="Marker2D" parent="Body"]
 position = Vector2(0, -19)
 
+[node name="ShootPoint2" type="Marker2D" parent="Body"]
+position = Vector2(13, -26)
+
+[node name="ShootPoint3" type="Marker2D" parent="Body"]
+position = Vector2(-13, -26)
+
 [node name="SpriteManager" type="Node" parent="Body" node_paths=PackedStringArray("lightSprite", "shadowSprite")]
 script = ExtResource("4_su1pt")
 lightSprite = NodePath("../LightMode")
@@ -123,11 +129,14 @@ ghost_timer = NodePath("../../Timers/GhostTimer")
 hurtboxLight = NodePath("../../Areas/HurtboxLight")
 hurtboxShadow = NodePath("../../Areas/HurtboxShadow")
 
-[node name="Shoot" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "shootPoint", "shootTimer")]
+[node name="Shoot" type="Node2D" parent="Components" node_paths=PackedStringArray("player", "shootPoint", "shootPoint2", "shootPoint3", "shootTimer", "multipleShootTimer")]
 script = ExtResource("7_ie54y")
 player = NodePath("../..")
 shootPoint = NodePath("../../Body/ShootPoint")
+shootPoint2 = NodePath("../../Body/ShootPoint2")
+shootPoint3 = NodePath("../../Body/ShootPoint3")
 shootTimer = NodePath("../../Timers/ShootTimer")
+multipleShootTimer = NodePath("../../Timers/MultipleShoot")
 
 [node name="Health" type="Node" parent="Components"]
 script = ExtResource("8_tejuy")
@@ -200,6 +209,10 @@ one_shot = true
 wait_time = 8.0
 one_shot = true
 
+[node name="MultipleShoot" type="Timer" parent="Timers"]
+wait_time = 7.0
+one_shot = true
+
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="HurtboxShadow" type="Area2D" parent="Areas"]
@@ -250,3 +263,4 @@ shadowArea = NodePath("../HurtboxShadow")
 [connection signal="timeout" from="Timers/DashCooldown" to="Components/Dash" method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="Timers/Barrier" to="Components/Barrier" method="_on_barrier_timeout"]
 [connection signal="timeout" from="Timers/BarrierBlink" to="Components/Barrier" method="_on_barrier_blink_timeout"]
+[connection signal="timeout" from="Timers/MultipleShoot" to="Components/Shoot" method="_on_multiple_shoot_timeout"]
