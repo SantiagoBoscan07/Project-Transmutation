@@ -79,6 +79,9 @@ func _unhandled_input(event):
 			itemSlots[0] = null
 			hidePortray(itemSlots[1], frame2)
 			itemSlots[1] = null
+			match sum:
+				_:
+					Signals.heal.emit(50)
 			removeResultant(sum)
 	if event.is_action_pressed("dispose_first"):
 		if itemSlots[0] != null:
