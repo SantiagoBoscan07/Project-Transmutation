@@ -19,6 +19,7 @@ func itemCollect(itemType):
 			if itemSlots[0] != null and itemSlots[1] != null:
 				for j in itemSlots:
 					sum += j
+				sum += 1
 				addResultant(sum)
 			break
 
@@ -54,18 +55,18 @@ func hidePortray(itemType,frame):
 
 func addResultant(result):
 	match result:
-		1:
+		2:
 			frame3.find_child("Barrier").show()
-		5:
+		6:
 			frame3.find_child("Laser").show()
 		_:
 			frame3.find_child("Heal").show()
 
 func removeResultant(result):
 	match result:
-		1:
+		2:
 			frame3.find_child("Barrier").hide()
-		5:
+		6:
 			frame3.find_child("Laser").hide()
 		_:
 			frame3.find_child("Heal").hide()

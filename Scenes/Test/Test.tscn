@@ -76,18 +76,18 @@ process_mode = 4
 position = Vector2(142, 92)
 
 [node name="Item" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(146, 199)
+position = Vector2(113, 199)
 currentItemType = 3
 
 [node name="Item2" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(63, 155)
+position = Vector2(111, 158)
 currentItemType = 2
 
 [node name="Item3" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(214, 160)
+position = Vector2(53, 162)
 
 [node name="Item4" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(55, 252)
+position = Vector2(55, 203)
 currentItemType = 1
 
 [node name="FPS" type="RichTextLabel" parent="."]
@@ -96,3 +96,17 @@ offset_top = 2.0
 offset_right = 300.0
 offset_bottom = 33.0
 script = ExtResource("3_jjn2o")
+
+[node name="Item5" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(201, 159)
+
+[node name="Item6" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(206, 207)
+
+[node name="Item7" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(260, 157)
+currentItemType = 2
+
+[node name="Item8" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(259, 208)
+currentItemType = 1
