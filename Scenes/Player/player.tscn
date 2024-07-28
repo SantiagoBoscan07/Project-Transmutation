@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=26 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://cnn1dw3c645gp" path="res://Sprites/mcdraft2.png" id="2_isw2c"]
 [ext_resource type="Texture2D" uid="uid://b1olf52lu4f86" path="res://Sprites/mcdraft1.png" id="2_q16sa"]
 [ext_resource type="Script" path="res://Scripts/Player/Move.gd" id="3_fxjg7"]
+[ext_resource type="Texture2D" uid="uid://bty2hq8s557du" path="res://Sprites/barrier.png" id="4_4muqa"]
 [ext_resource type="Script" path="res://Scripts/Player/PositionClamp.gd" id="4_dxttt"]
 [ext_resource type="Script" path="res://Scripts/Misc/SpriteManager.gd" id="4_su1pt"]
 [ext_resource type="Script" path="res://Scripts/Player/Dash.gd" id="5_ais5j"]
@@ -16,12 +17,55 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="11_lwfiv"]
 [ext_resource type="Script" path="res://Scripts/Player/Heal.gd" id="14_oer66"]
 [ext_resource type="Script" path="res://Scenes/Player/AreaSwitch.gd" id="15_dd54t"]
+[ext_resource type="Script" path="res://Scripts/Player/Barrier.gd" id="16_uihej"]
+[ext_resource type="Script" path="res://Scripts/Player/BarrierHurt.gd" id="17_hndc8"]
+
+[sub_resource type="Animation" id="Animation_4d8cj"]
+resource_name = "blink"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrier:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_22275"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrier:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dun2g"]
+_data = {
+"RESET": SubResource("Animation_22275"),
+"blink": SubResource("Animation_4d8cj")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h00vk"]
 radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7hbsw"]
 height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u2a40"]
+radius = 24.0208
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -37,6 +81,12 @@ texture = ExtResource("2_isw2c")
 [node name="LightMode" type="Sprite2D" parent="Body"]
 texture = ExtResource("2_q16sa")
 
+[node name="Barrier" type="Sprite2D" parent="Body"]
+visible = false
+modulate = Color(1, 1, 1, 0.392157)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_4muqa")
+
 [node name="ShootPoint" type="Marker2D" parent="Body"]
 position = Vector2(0, -19)
 
@@ -44,6 +94,11 @@ position = Vector2(0, -19)
 script = ExtResource("4_su1pt")
 lightSprite = NodePath("../LightMode")
 shadowSprite = NodePath("../ShadowMode")
+
+[node name="BarrierBlink" type="AnimationPlayer" parent="Body"]
+libraries = {
+"": SubResource("AnimationLibrary_dun2g")
+}
 
 [node name="Components" type="Node" parent="."]
 
@@ -108,6 +163,18 @@ sprite = NodePath("../../Body/LightMode")
 script = ExtResource("14_oer66")
 health = NodePath("../Health")
 
+[node name="Barrier" type="Node2D" parent="Components" node_paths=PackedStringArray("barrierTimer", "barrierBlink", "barrierHurtbox", "blinkAnimation", "sprite")]
+script = ExtResource("16_uihej")
+barrierTimer = NodePath("../../Timers/Barrier")
+barrierBlink = NodePath("../../Timers/BarrierBlink")
+barrierHurtbox = NodePath("../../Areas/HurtboxBarrier")
+blinkAnimation = NodePath("../../Body/BarrierBlink")
+sprite = NodePath("../../Body/Barrier")
+
+[node name="BarrierHurt" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("17_hndc8")
+hurtbox = NodePath("../../Areas/HurtboxBarrier")
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="DashTimer" type="Timer" parent="Timers"]
@@ -123,6 +190,14 @@ one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="Timers"]
 wait_time = 3.0
+one_shot = true
+
+[node name="Barrier" type="Timer" parent="Timers"]
+wait_time = 10.0
+one_shot = true
+
+[node name="BarrierBlink" type="Timer" parent="Timers"]
+wait_time = 8.0
 one_shot = true
 
 [node name="Areas" type="Node2D" parent="."]
@@ -155,6 +230,15 @@ visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7hbsw")
 
+[node name="HurtboxBarrier" type="Area2D" parent="Areas"]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("9_dstq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HurtboxBarrier"]
+visible = false
+shape = SubResource("CircleShape2D_u2a40")
+
 [node name="HurtboxManager" type="Node2D" parent="Areas" node_paths=PackedStringArray("lightArea", "shadowArea")]
 script = ExtResource("15_dd54t")
 lightArea = NodePath("../HurtboxLight")
@@ -164,3 +248,5 @@ shadowArea = NodePath("../HurtboxShadow")
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="Timers/ShootTimer" to="Components/Shoot" method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="Timers/DashCooldown" to="Components/Dash" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="Timers/Barrier" to="Components/Barrier" method="_on_barrier_timeout"]
+[connection signal="timeout" from="Timers/BarrierBlink" to="Components/Barrier" method="_on_barrier_blink_timeout"]

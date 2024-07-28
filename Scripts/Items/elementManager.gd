@@ -81,6 +81,10 @@ func _unhandled_input(event):
 			hidePortray(itemSlots[1], frame2)
 			itemSlots[1] = null
 			match sum:
+				2:
+					Signals.barrier.emit()
+				6:
+					Signals.laser.emit()
 				_:
 					Signals.heal.emit(50)
 			removeResultant(sum)
