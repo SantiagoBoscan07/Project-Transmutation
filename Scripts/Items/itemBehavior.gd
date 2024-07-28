@@ -10,7 +10,7 @@ func _ready():
 	hurtbox.area_entered.connect(_on_area_entered)
 
 func _on_area_entered(area):
-	print("Item Collected")
+	Signals.itemCollected.emit(owner.currentItemType)
 	hurtbox.area_entered.disconnect(_on_area_entered)
 	if idle.upTween:
 		idle.upTween.stop()

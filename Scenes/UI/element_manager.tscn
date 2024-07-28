@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://efew5cqtfky1"]
+[gd_scene load_steps=11 format=3 uid="uid://efew5cqtfky1"]
 
 [ext_resource type="Texture2D" uid="uid://bsfenqwpxdkxu" path="res://Sprites/frame.png" id="1_hem1t"]
 [ext_resource type="Texture2D" uid="uid://dmjns00y66vms" path="res://Sprites/items1.png" id="2_rrejs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cgumlljme4vbs" path="res://Sprites/resultsitems1.png" id="7_us7vr"]
 [ext_resource type="Texture2D" uid="uid://csjxlfl0317ig" path="res://Sprites/resultsitems3.png" id="8_1r03b"]
 [ext_resource type="Texture2D" uid="uid://cyio3eimlbs6f" path="res://Sprites/resultsitems2.png" id="9_xlgpb"]
+[ext_resource type="Script" path="res://Scripts/Items/elementManager.gd" id="10_lx56f"]
 
 [node name="ElementManager" type="Control"]
 layout_mode = 3
@@ -48,6 +49,16 @@ theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
 theme_override_fonts/font = ExtResource("6_3cvr8")
 theme_override_font_sizes/font_size = 16
 text = "Dispose: A"
+
+[node name="Label2" type="Label" parent="Item1"]
+offset_left = 25.0
+offset_top = -13.0
+offset_right = 37.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_fonts/font = ExtResource("6_3cvr8")
+theme_override_font_sizes/font_size = 32
+text = "+"
 
 [node name="Item2" type="Node2D" parent="."]
 position = Vector2(79, 20)
@@ -109,24 +120,20 @@ theme_override_fonts/font = ExtResource("6_3cvr8")
 theme_override_font_sizes/font_size = 16
 text = "Transmute: C"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 56.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
-theme_override_fonts/font = ExtResource("6_3cvr8")
-theme_override_font_sizes/font_size = 32
-text = "+"
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 107.0
-offset_top = 7.0
-offset_right = 119.0
-offset_bottom = 33.0
+[node name="Label2" type="Label" parent="Item3"]
+offset_left = -38.0
+offset_top = -13.0
+offset_right = -26.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
 theme_override_fonts/font = ExtResource("6_3cvr8")
 theme_override_font_sizes/font_size = 32
 text = "="
+
+[node name="Components" type="Node" parent="."]
+
+[node name="ElementManager" type="Node" parent="Components" node_paths=PackedStringArray("frame1", "frame2", "frame3")]
+script = ExtResource("10_lx56f")
+frame1 = NodePath("../../Item1")
+frame2 = NodePath("../../Item2")
+frame3 = NodePath("../../Item3")
