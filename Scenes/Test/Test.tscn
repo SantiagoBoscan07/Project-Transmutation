@@ -71,7 +71,6 @@ position = Vector2(20, 85)
 spawnTime = 0.01
 
 [node name="Enemy" parent="." instance=ExtResource("5_4olau")]
-process_mode = 4
 position = Vector2(142, 92)
 
 [node name="Item" parent="." instance=ExtResource("7_iyk06")]
@@ -81,6 +80,13 @@ currentItemType = 3
 [node name="Item2" parent="." instance=ExtResource("7_iyk06")]
 position = Vector2(111, 158)
 currentItemType = 2
+
+[node name="Item3" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(50, 158)
+
+[node name="Item4" parent="." instance=ExtResource("7_iyk06")]
+position = Vector2(48, 199)
+currentItemType = 1
 
 [node name="FPS" type="RichTextLabel" parent="."]
 offset_left = 239.0
