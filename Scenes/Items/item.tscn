@@ -13,6 +13,7 @@
 radius = 17.0294
 
 [node name="Item" type="Node2D"]
+z_index = 1
 script = ExtResource("1_t8fuh")
 
 [node name="Body" type="Node2D" parent="."]

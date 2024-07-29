@@ -1,6 +1,7 @@
 extends State
 
 
+
 func enter():
 	super.enter()
 	if owner.rightEntrance:
@@ -8,7 +9,6 @@ func enter():
 	if owner.upEntrance:
 		if owner.randomDirection:
 			move.velocity.x *= -1
-
 
 func transition():
 	if can_transition:

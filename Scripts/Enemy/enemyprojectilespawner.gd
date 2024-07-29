@@ -12,6 +12,9 @@ var enemyProjectile
 @export var isShadow: bool = false:
 	set(value):
 		isShadow = value
+@export var canShoot: bool = true:
+	set(value):
+		canShoot = value
 
 func getVector(angle):
 	theta = angle + alpha
@@ -26,4 +29,5 @@ func shoot(angle):
 
 
 func _on_spawn_timer_timeout():
-	shoot(theta)
+	if canShoot:
+		shoot(theta)

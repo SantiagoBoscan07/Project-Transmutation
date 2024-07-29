@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbp67xw10qpno"]
+[gd_scene load_steps=13 format=3 uid="uid://dbp67xw10qpno"]
 
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="1_6k4t3"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.gd" id="1_gidfm"]
 [ext_resource type="Script" path="res://Scripts/Misc/Idle.gd" id="1_mogy1"]
 [ext_resource type="Texture2D" uid="uid://cnn1dw3c645gp" path="res://Sprites/mcdraft2.png" id="2_455ju"]
 [ext_resource type="Script" path="res://Scripts/Enemy/StateMachine.gd" id="4_w18q4"]
@@ -16,12 +15,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_x1kpk"]
 radius = 11.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox", "flash") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 2
-script = ExtResource("1_gidfm")
-health = NodePath("Component/Health")
-hurtbox = NodePath("Areas/Hurtbox")
-flash = NodePath("Component/Flash")
 
 [node name="Body" type="Node2D" parent="."]
 

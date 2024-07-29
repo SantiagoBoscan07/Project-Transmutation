@@ -6,14 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="3_y33hk"]
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_2db1s"]
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="4_ar7vd"]
-[ext_resource type="PackedScene" uid="uid://dbp67xw10qpno" path="res://Scripts/Enemy/Enemy.tscn" id="5_4olau"]
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rleoa"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="7_iyk06"]
+[ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="9_8vfdn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.196078)
 
 [node name="Test" type="Node2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(149.5, 160.5)
+scale = Vector2(15.05, 18.85)
 
 [node name="Player" parent="." instance=ExtResource("1_u564h")]
 texture_filter = 1
@@ -68,10 +72,8 @@ horizontal_alignment = 1
 [node name="ProjectileSpawner" parent="." instance=ExtResource("3_y33hk")]
 process_mode = 4
 position = Vector2(20, 85)
-spawnTime = 0.01
-
-[node name="Enemy" parent="." instance=ExtResource("5_4olau")]
-position = Vector2(142, 92)
+alpha = 3.171
+spawnTime = 0.08
 
 [node name="Item" parent="." instance=ExtResource("7_iyk06")]
 position = Vector2(113, 199)
@@ -89,8 +91,15 @@ position = Vector2(48, 199)
 currentItemType = 1
 
 [node name="FPS" type="RichTextLabel" parent="."]
+z_index = 10
 offset_left = 239.0
 offset_top = 2.0
 offset_right = 300.0
 offset_bottom = 33.0
+theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("3_jjn2o")
+
+[node name="Enemy" parent="." instance=ExtResource("9_8vfdn")]
+position = Vector2(-12, 45)
+isShadow = true
+leftEntrance = true
