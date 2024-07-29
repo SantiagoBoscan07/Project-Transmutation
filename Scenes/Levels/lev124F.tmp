@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c12j3furthfib"]
+[gd_scene load_steps=21 format=3 uid="uid://c12j3furthfib"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_fai5p"]
@@ -7,22 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rxkmw"]
 [ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="6_ahhdu"]
 [ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="6_w7fja"]
-[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="7_67xcf"]
 [ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_oxlmv"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="9_nuaoy"]
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="10_3tdu4"]
 [ext_resource type="Script" path="res://Scripts/Tutorial/tutorial1.gd" id="10_sg64s"]
-[ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_ganpy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
-bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.196078)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
-bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.196078)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd0ks"]
-bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.392157)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -83,7 +81,7 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sn7mp"]
-bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.392157)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -154,7 +152,7 @@ offset_bottom = -277.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_biafh")
 
 [node name="LevelTimer" type="Timer" parent="Player UI/TimerPanel"]
-wait_time = 80.0
+wait_time = 150.0
 one_shot = true
 
 [node name="TimerManager" type="Node" parent="Player UI/TimerPanel" node_paths=PackedStringArray("label", "levelTimer")]
@@ -183,8 +181,8 @@ theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("6_w7fja")
 
 [node name="ItemSpawner" parent="." instance=ExtResource("7_oxlmv")]
-spawnTime = 15.0
-spawnerDuration = 70.0
+spawnTime = 25.0
+spawnerDuration = 90.0
 objectToSpawn = ExtResource("8_n32jl")
 spawnUp = true
 
@@ -194,9 +192,20 @@ spawnerDuration = 31.0
 objectToSpawn = ExtResource("8_n32jl")
 spawnUp = true
 
-[node name="Tutorial1" type="Node2D" parent="."]
+[node name="Wave1" type="Node2D" parent="."]
 
-[node name="Tutorial1" type="Label" parent="Tutorial1" node_paths=PackedStringArray("nextWave")]
+[node name="EnemySpawner" parent="Wave1" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 2.0
+spawnerDuration = 3.0
+objectToSpawn = ExtResource("9_nuaoy")
+spawnPosition = Vector2(146, 0)
+isShadow = true
+alpha = 0.8
+projectileSpawnTime = 0.1
+spawnerTimer = 3.0
+nextWave = NodePath("../../Wave2")
+
+[node name="Tutorial1" type="Label" parent="Wave1"]
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -219,52 +228,48 @@ Dash: Shift
 Shoot: Z Key"
 horizontal_alignment = 1
 script = ExtResource("10_sg64s")
-nextWave = NodePath("../../Wave1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial1/Tutorial1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wave1/Tutorial1"]
 libraries = {
 "": SubResource("AnimationLibrary_4t0q0")
 }
 autoplay = "fadeIn"
 
-[node name="Wave1" type="Node2D" parent="."]
+[node name="Wave2" type="Node2D" parent="."]
 process_mode = 4
 
-[node name="EnemySpawner" parent="Wave1" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+[node name="Spawner" parent="Wave2" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 4.0
+spawnerDuration = 15.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnUp = true
+isShadow = true
+nextWave = NodePath("../../Wave3")
+
+[node name="Wave3" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave3" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
 spawnTime = 3.0
 spawnerDuration = 5.0
 objectToSpawn = ExtResource("9_nuaoy")
 spawnPosition = Vector2(146, 0)
 isShadow = true
-alpha = 0.8
-projectileSpawnTime = 0.1
-spawnerTimer = 2.0
-nextWave = NodePath("../../Wave2")
+alpha = 1.3
+projectileSpawnTime = 0.01
+spawnerTimer = 3.0
+nextWave = NodePath("../../Wave4")
 
-[node name="Wave2" type="Node2D" parent="."]
-process_mode = 4
-
-[node name="Spawner" parent="Wave2" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
-spawnTime = 3.0
-spawnerDuration = 9.0
-objectToSpawn = ExtResource("10_3tdu4")
-spawnUp = true
-isShadow = true
-nextWave = NodePath("../../Tutorial2")
-
-[node name="Tutorial2" type="Node2D" parent="."]
-process_mode = 4
-
-[node name="Tutorial2" type="Label" parent="Tutorial2" node_paths=PackedStringArray("nextWave")]
+[node name="Tutorial2" type="Label" parent="Wave3"]
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 48.0
+offset_left = 58.0
 offset_top = 99.0
-offset_right = 252.0
+offset_right = 242.0
 offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -277,45 +282,44 @@ text = "
 World Switch: X Key"
 horizontal_alignment = 1
 script = ExtResource("10_sg64s")
-nextWave = NodePath("../../Wave3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial2/Tutorial2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wave3/Tutorial2"]
 libraries = {
 "": SubResource("AnimationLibrary_4t0q0")
 }
 autoplay = "fadeIn"
 
-[node name="Wave3" type="Node2D" parent="."]
-process_mode = 4
-
-[node name="Spawner" parent="Wave3" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
-spawnTime = 4.0
-spawnerDuration = 6.0
-objectToSpawn = ExtResource("9_nuaoy")
-spawnPosition = Vector2(146, 0)
-isShadow = true
-alpha = 1.3
-projectileSpawnTime = 0.01
-spawnerTimer = 2.0
-nextWave = NodePath("../../Wave4")
-
 [node name="Wave4" type="Node2D" parent="."]
 process_mode = 4
 
 [node name="Spawner" parent="Wave4" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
-spawnTime = 4.0
-spawnerDuration = 6.0
+spawnTime = 3.0
+spawnerDuration = 5.0
 objectToSpawn = ExtResource("9_nuaoy")
 spawnPosition = Vector2(146, 0)
 alpha = 1.3
 projectileSpawnTime = 0.01
-spawnerTimer = 1.0
-nextWave = NodePath("../../Tutorial3")
+spawnerTimer = 3.0
+nextWave = NodePath("../../Wave5")
 
-[node name="Tutorial3" type="Node2D" parent="."]
+[node name="Wave5" type="Node2D" parent="."]
 process_mode = 4
 
-[node name="Tutorial3" type="Label" parent="Tutorial3" node_paths=PackedStringArray("nextWave")]
+[node name="Spawner" parent="Wave5" instance=ExtResource("7_oxlmv")]
+spawnTime = 8.0
+spawnerDuration = 18.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnRight = true
+
+[node name="Spawner2" parent="Wave5" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 12.0
+spawnerDuration = 25.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnLeft = true
+isShadow = true
+nextWave = NodePath("../../Wave6")
+
+[node name="Tutorial3" type="Label" parent="Wave5"]
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -338,35 +342,17 @@ If 2 Elements
 Are Collected"
 horizontal_alignment = 1
 script = ExtResource("10_sg64s")
-nextWave = NodePath("../../Wave5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial3/Tutorial3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wave5/Tutorial3"]
 libraries = {
 "": SubResource("AnimationLibrary_4t0q0")
 }
 autoplay = "fadeIn"
 
-[node name="Wave5" type="Node2D" parent="."]
+[node name="Wave6" type="Node2D" parent="."]
 process_mode = 4
 
-[node name="Spawner" parent="Wave5" instance=ExtResource("7_oxlmv")]
-spawnTime = 4.0
-spawnerDuration = 12.0
-objectToSpawn = ExtResource("10_3tdu4")
-spawnRight = true
-
-[node name="Spawner2" parent="Wave5" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
-spawnTime = 8.0
-spawnerDuration = 16.0
-objectToSpawn = ExtResource("10_3tdu4")
-spawnLeft = true
-isShadow = true
-nextWave = NodePath("../../Tutorial4")
-
-[node name="Tutorial4" type="Node2D" parent="."]
-process_mode = 4
-
-[node name="Tutorial4" type="Label" parent="Tutorial4" node_paths=PackedStringArray("nextWave")]
+[node name="Tutorial3" type="Label" parent="Wave6"]
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -389,20 +375,16 @@ Elements With
 A and S Key"
 horizontal_alignment = 1
 script = ExtResource("10_sg64s")
-nextWave = NodePath("../../Wave6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial4/Tutorial4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wave6/Tutorial3"]
 libraries = {
 "": SubResource("AnimationLibrary_4t0q0")
 }
 autoplay = "fadeIn"
 
-[node name="Wave6" type="Node2D" parent="."]
-process_mode = 4
-
 [node name="Spawner" parent="Wave6" instance=ExtResource("7_oxlmv")]
-spawnTime = 3.0
-spawnerDuration = 4.0
+spawnTime = 5.0
+spawnerDuration = 6.0
 objectToSpawn = ExtResource("9_nuaoy")
 spawnPosition = Vector2(300, 0)
 isShadow = true
@@ -418,20 +400,7 @@ alpha = 2.2
 projectileSpawnTime = 0.05
 spawnerTimer = 10.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(0, 350)
-script = ExtResource("13_ganpy")
-speed = -30
-
-[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(1, 1, 1, 0.196078)
-z_index = -1
-texture = ExtResource("7_67xcf")
-centered = false
-
-[connection signal="animation_finished" from="Tutorial1/Tutorial1/AnimationPlayer" to="Tutorial1/Tutorial1" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="Tutorial2/Tutorial2/AnimationPlayer" to="Tutorial2/Tutorial2" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="Tutorial3/Tutorial3/AnimationPlayer" to="Tutorial3/Tutorial3" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="Tutorial4/Tutorial4/AnimationPlayer" to="Tutorial4/Tutorial4" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Wave1/Tutorial1/AnimationPlayer" to="Wave1/Tutorial1" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Wave3/Tutorial2/AnimationPlayer" to="Wave3/Tutorial2" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Wave5/Tutorial3/AnimationPlayer" to="Wave5/Tutorial3" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Wave6/Tutorial3/AnimationPlayer" to="Wave6/Tutorial3" method="_on_animation_player_animation_finished"]

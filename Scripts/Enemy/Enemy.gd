@@ -2,8 +2,7 @@ extends CharacterBody2D
 
 @export var health: Health
 @export var hurtbox: Hurtbox
-@export var flashLight: Flash
-@export var shadowLight: Flash
+@export var flash: Flash
 @export var projectileSpawner: Node2D
 @export var isShadow: bool = false:
 	set(value):
@@ -27,8 +26,7 @@ var randomDirection: bool:
 
 func _ready():
 	hurtbox.hurt.connect(func(hitbox: Hitbox):
-		flashLight.flash()
-		shadowLight.flash()
+		flash._flash()
 		)
 	health.no_health.connect(die)
 	projectileSpawner.isShadow = isShadow

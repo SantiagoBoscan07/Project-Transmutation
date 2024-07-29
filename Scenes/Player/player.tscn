@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=29 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://cnn1dw3c645gp" path="res://Sprites/mcdraft2.png" id="2_isw2c"]
@@ -58,6 +58,43 @@ _data = {
 "blink": SubResource("Animation_4d8cj")
 }
 
+[sub_resource type="Animation" id="Animation_ec11y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_os828"]
+resource_name = "flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.694118, 0.2, 0.32549, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6i4m1"]
+_data = {
+"RESET": SubResource("Animation_ec11y"),
+"flash": SubResource("Animation_os828")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_h00vk"]
 radius = 6.0
 
@@ -106,6 +143,11 @@ libraries = {
 "": SubResource("AnimationLibrary_dun2g")
 }
 
+[node name="FlashAnimation" type="AnimationPlayer" parent="Body"]
+libraries = {
+"": SubResource("AnimationLibrary_6i4m1")
+}
+
 [node name="Components" type="Node" parent="."]
 
 [node name="Move" type="Node2D" parent="Components" node_paths=PackedStringArray("player")]
@@ -152,13 +194,9 @@ script = ExtResource("9_buh61")
 health = NodePath("../Health")
 hurtbox = NodePath("../../Areas/HurtboxLight")
 
-[node name="LightFlash" type="Node" parent="Components" node_paths=PackedStringArray("sprite")]
+[node name="Flash" type="Node" parent="Components" node_paths=PackedStringArray("flash")]
 script = ExtResource("10_iybpp")
-sprite = NodePath("../../Body/ShadowMode")
-
-[node name="ShadowFlash" type="Node" parent="Components" node_paths=PackedStringArray("sprite")]
-script = ExtResource("10_iybpp")
-sprite = NodePath("../../Body/LightMode")
+flash = NodePath("../../Body/FlashAnimation")
 
 [node name="ShadowIdle" type="Node2D" parent="Components" node_paths=PackedStringArray("sprite")]
 script = ExtResource("11_lwfiv")
