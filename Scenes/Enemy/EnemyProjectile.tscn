@@ -34,6 +34,7 @@ script = ExtResource("4_i30pa")
 [node name="LightHitbox" type="Area2D" parent="Area"]
 collision_layer = 0
 script = ExtResource("4_rnd5l")
+damage = 10
 
 [node name="Hitbox" type="CollisionShape2D" parent="Area/LightHitbox"]
 shape = SubResource("CircleShape2D_82xp2")
@@ -42,6 +43,7 @@ shape = SubResource("CircleShape2D_82xp2")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_rnd5l")
+damage = 10
 
 [node name="Hitbox" type="CollisionShape2D" parent="Area/ShadowHitbox"]
 shape = SubResource("CircleShape2D_82xp2")
