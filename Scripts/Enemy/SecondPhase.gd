@@ -1,12 +1,15 @@
 extends State
 
-@export var projectiles: Node2D
+
 
 func enter():
 	super.enter()
-	projectiles.alpha = 1.6
-	projectiles.spawnTime = 0.05
+	if owner.rightEntrance:
+		move.velocity.x *= -1
+	if owner.upEntrance:
+		if owner.randomDirection:
+			move.velocity.x *= -1
 
 func transition():
 	if can_transition:
-		get_parent().change_state("FirstPhase")
+		get_parent().change_state(nextPhase.name)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://5qgnmnke7lw2"]
+
+[ext_resource type="Script" path="res://Scripts/Misc/SpawnerNode.gd" id="1_68uqt"]
+[ext_resource type="Script" path="res://Scripts/Misc/Spawner.gd" id="1_3573e"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_3573e")
+
+[node name="SpawnerNode" type="Node2D" parent="."]
+script = ExtResource("1_68uqt")
+
+[node name="SpawnTime" type="Timer" parent="."]
+
+[node name="SpawnerDuration" type="Timer" parent="."]
+
+[node name="ProjectileSpawnerDuration" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SpawnTime" to="." method="_on_spawn_time_timeout"]
+[connection signal="timeout" from="SpawnerDuration" to="." method="_on_spawner_duration_timeout"]
+[connection signal="timeout" from="ProjectileSpawnerDuration" to="SpawnerNode" method="_on_projectile_spawner_duration_timeout"]

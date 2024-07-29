@@ -1,4 +1,5 @@
 extends Node
+class_name MoveObject
 
 @export var body: CharacterBody2D
 @export var velocity: Vector2:
