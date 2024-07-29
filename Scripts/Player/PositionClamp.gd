@@ -4,8 +4,8 @@ extends Node
 
 var left_border = 0
 var right_border = 300
-var bottom_border = 350
-var up_border = 32
+var bottom_border = 304
+var up_border = 0
 
 
 func _process(delta):
