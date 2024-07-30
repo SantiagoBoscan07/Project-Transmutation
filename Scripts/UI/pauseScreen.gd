@@ -4,7 +4,7 @@ func _ready():
 	hide()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") and !Globals.isDead:
 		if Globals.isPaused:
 			Engine.time_scale = 1
 			hide()

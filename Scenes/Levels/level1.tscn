@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c12j3furthfib"]
+[gd_scene load_steps=25 format=3 uid="uid://c12j3furthfib"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
 [ext_resource type="PackedScene" uid="uid://c2wvs4m7tk0hf" path="res://Scenes/UI/pause_screen.tscn" id="2_bktg1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="7_67xcf"]
 [ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_oxlmv"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
+[ext_resource type="PackedScene" uid="uid://c5t2wuaxcdrlk" path="res://Scenes/UI/game_over_screen.tscn" id="8_vyc5i"]
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="9_nuaoy"]
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="10_3tdu4"]
 [ext_resource type="Script" path="res://Scripts/Tutorial/tutorial1.gd" id="10_sg64s"]
@@ -179,6 +180,12 @@ theme_override_fonts/font = ExtResource("4_qfalc")
 theme_override_font_sizes/font_size = 32
 text = "01:55"
 horizontal_alignment = 1
+
+[node name="GameOverScreen" parent="Player UI" instance=ExtResource("8_vyc5i")]
+visible = false
+layout_mode = 1
+offset_top = -304.0
+offset_bottom = -304.0
 
 [node name="FPS" type="RichTextLabel" parent="."]
 z_index = 10

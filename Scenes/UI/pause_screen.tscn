@@ -58,7 +58,7 @@ script = ExtResource("1_d7j2k")
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 350.0
-color = Color(0, 0, 0, 0.784314)
+color = Color(0.0235294, 0.0588235, 0.0509804, 0.784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
 position = Vector2(80, 66)
