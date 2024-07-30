@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkshbhow8ihs1"]
+[gd_scene load_steps=11 format=3 uid="uid://bkshbhow8ihs1"]
 
 [ext_resource type="Texture2D" uid="uid://dmjns00y66vms" path="res://Sprites/items1.png" id="1_8mwtg"]
 [ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_t8fuh"]
@@ -7,12 +7,14 @@
 [ext_resource type="Script" path="res://Scripts/Items/itemBehavior.gd" id="3_1fmqs"]
 [ext_resource type="Texture2D" uid="uid://rcptakthlht0" path="res://Sprites/items2.png" id="3_8yri2"]
 [ext_resource type="Texture2D" uid="uid://do0om33valwqa" path="res://Sprites/items4.png" id="4_bcluc"]
+[ext_resource type="Script" path="res://Scripts/Enemy/enemyMove.gd" id="7_qs4nl"]
 [ext_resource type="Script" path="res://Scripts/Items/itemSpriteManager.gd" id="8_x6axv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ohy2d"]
 radius = 17.0294
 
-[node name="Item" type="Node2D"]
+[node name="Item" type="CharacterBody2D" groups=["Item"]]
+z_index = 1
 script = ExtResource("1_t8fuh")
 
 [node name="Body" type="Node2D" parent="."]
@@ -40,6 +42,11 @@ script = ExtResource("2_s42y5")
 sprite = NodePath("../Main")
 speed = 1.0
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Body"]
+position = Vector2(0.5, 2)
+scale = Vector2(1.75, 1.7)
+enable_node_path = NodePath("../..")
+
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="Hurtbox" type="Area2D" parent="Areas"]
@@ -51,6 +58,11 @@ position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_ohy2d")
 
 [node name="Component" type="Node" parent="."]
+
+[node name="MoveObject" type="Node" parent="Component" node_paths=PackedStringArray("body")]
+script = ExtResource("7_qs4nl")
+body = NodePath("../..")
+velocity = Vector2(0, 30)
 
 [node name="ItemBehavior" type="Node2D" parent="Component" node_paths=PackedStringArray("sprite", "idle", "hurtbox")]
 script = ExtResource("3_1fmqs")
@@ -64,3 +76,5 @@ fireSprite = NodePath("../../Body/Main/Fire")
 waterSprite = NodePath("../../Body/Main/Water")
 earthSprite = NodePath("../../Body/Main/Earth")
 airSprite = NodePath("../../Body/Main/Air")
+
+[connection signal="screen_exited" from="Body/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

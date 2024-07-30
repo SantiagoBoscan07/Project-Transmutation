@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://birnguoyjjy7o"]
+[gd_scene load_steps=12 format=3 uid="uid://birnguoyjjy7o"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_u564h"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_yt58w"]
@@ -6,18 +6,23 @@
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="3_y33hk"]
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_2db1s"]
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="4_ar7vd"]
-[ext_resource type="PackedScene" uid="uid://dbp67xw10qpno" path="res://Scripts/Enemy/Enemy.tscn" id="5_4olau"]
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rleoa"]
+[ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_iuwja"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="7_iyk06"]
+[ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="9_8vfdn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.196078)
 
 [node name="Test" type="Node2D"]
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(149.5, 160.5)
+scale = Vector2(15.05, 18.85)
+
 [node name="Player" parent="." instance=ExtResource("1_u564h")]
 texture_filter = 1
-position = Vector2(147, 271)
+position = Vector2(146, 276)
 
 [node name="UI TEST" type="Control" parent="."]
 z_index = 2
@@ -65,32 +70,44 @@ horizontal_alignment = 1
 
 [node name="ElementManager" parent="UI TEST/Panel2" instance=ExtResource("5_rleoa")]
 
-[node name="ProjectileSpawner" parent="." instance=ExtResource("3_y33hk")]
-process_mode = 4
-position = Vector2(20, 85)
-spawnTime = 0.01
-
-[node name="Enemy" parent="." instance=ExtResource("5_4olau")]
-position = Vector2(142, 92)
-
-[node name="Item" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(113, 199)
-currentItemType = 3
-
-[node name="Item2" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(111, 158)
-currentItemType = 2
-
-[node name="Item3" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(50, 158)
-
-[node name="Item4" parent="." instance=ExtResource("7_iyk06")]
-position = Vector2(48, 199)
-currentItemType = 1
-
 [node name="FPS" type="RichTextLabel" parent="."]
+z_index = 10
 offset_left = 239.0
 offset_top = 2.0
 offset_right = 300.0
 offset_bottom = 33.0
+theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("3_jjn2o")
+
+[node name="ItemSpawner" parent="." instance=ExtResource("7_iuwja")]
+spawnTime = 2.0
+spawnerDuration = 90.0
+objectToSpawn = ExtResource("7_iyk06")
+spawnUp = true
+
+[node name="Wave1" type="Node2D" parent="."]
+
+[node name="EnemySpawner" parent="Wave1" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_iuwja")]
+spawnTime = 1.0
+spawnerDuration = 1.5
+objectToSpawn = ExtResource("3_y33hk")
+spawnPosition = Vector2(146, 136)
+isShadow = true
+alpha = 1.5
+projectileSpawnTime = 0.05
+spawnerTimer = 2.0
+nextWave = NodePath("../../Wave2")
+
+[node name="Wave2" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave2" instance=ExtResource("7_iuwja")]
+spawnTime = 3.0
+spawnerDuration = 6.0
+objectToSpawn = ExtResource("9_8vfdn")
+spawnUp = true
+isShadow = true
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 300.0
+autostart = true

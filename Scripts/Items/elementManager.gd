@@ -86,7 +86,7 @@ func _unhandled_input(event):
 				6:
 					Signals.laser.emit()
 				_:
-					Signals.heal.emit(50)
+					Signals.heal.emit(10)
 			removeResultant(sum)
 	if event.is_action_pressed("dispose_first"):
 		if itemSlots[0] != null:

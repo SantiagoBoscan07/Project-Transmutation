@@ -1,0 +1,437 @@
+[gd_scene load_steps=23 format=3 uid="uid://c12j3furthfib"]
+
+[ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
+[ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_fai5p"]
+[ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_d5gea"]
+[ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_qfalc"]
+[ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rxkmw"]
+[ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="6_ahhdu"]
+[ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="6_w7fja"]
+[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="7_67xcf"]
+[ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_oxlmv"]
+[ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
+[ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="9_nuaoy"]
+[ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="10_3tdu4"]
+[ext_resource type="Script" path="res://Scripts/Tutorial/tutorial1.gd" id="10_sg64s"]
+[ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_ganpy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd0ks"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Animation" id="Animation_7n00k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6wnc6"]
+resource_name = "fadeIn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tu26y"]
+resource_name = "fadeOut"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4t0q0"]
+_data = {
+"RESET": SubResource("Animation_7n00k"),
+"fadeIn": SubResource("Animation_6wnc6"),
+"fadeOut": SubResource("Animation_tu26y")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sn7mp"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Test" type="Node2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(149.5, 160.5)
+scale = Vector2(15.05, 18.85)
+
+[node name="Player" parent="." instance=ExtResource("1_w4ox6")]
+texture_filter = 1
+position = Vector2(150, 276)
+
+[node name="Player UI" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_top = 304.0
+offset_right = 40.0
+offset_bottom = 344.0
+
+[node name="PlayerPanel" type="Panel" parent="Player UI"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 46.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfhqw")
+
+[node name="ProgressBar" parent="Player UI/PlayerPanel" instance=ExtResource("2_fai5p")]
+offset_left = 56.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 44.0
+
+[node name="HealthBar" type="Control" parent="Player UI/PlayerPanel" node_paths=PackedStringArray("healthBar", "player")]
+anchors_preset = 0
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 61.0
+offset_bottom = 43.0
+script = ExtResource("3_d5gea")
+healthBar = NodePath("Label")
+player = NodePath("../../../Player")
+
+[node name="Label" type="Label" parent="Player UI/PlayerPanel/HealthBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 46.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+text = "HP:
+100"
+horizontal_alignment = 1
+
+[node name="ElementManager" parent="Player UI/PlayerPanel" instance=ExtResource("5_rxkmw")]
+
+[node name="TimerPanel" type="Panel" parent="Player UI"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -305.0
+offset_right = 301.0
+offset_bottom = -277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_biafh")
+
+[node name="LevelTimer" type="Timer" parent="Player UI/TimerPanel"]
+wait_time = 80.0
+one_shot = true
+
+[node name="TimerManager" type="Node" parent="Player UI/TimerPanel" node_paths=PackedStringArray("label", "levelTimer")]
+script = ExtResource("6_ahhdu")
+label = NodePath("../Label")
+levelTimer = NodePath("../LevelTimer")
+
+[node name="Label" type="Label" parent="Player UI/TimerPanel"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 301.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+text = "01:55"
+horizontal_alignment = 1
+
+[node name="FPS" type="RichTextLabel" parent="."]
+z_index = 10
+offset_left = 239.0
+offset_top = 2.0
+offset_right = 300.0
+offset_bottom = 33.0
+theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
+script = ExtResource("6_w7fja")
+
+[node name="ItemSpawner" parent="." instance=ExtResource("7_oxlmv")]
+spawnTime = 15.0
+spawnerDuration = 70.0
+objectToSpawn = ExtResource("8_n32jl")
+spawnUp = true
+
+[node name="ItemSpawner2" parent="." instance=ExtResource("7_oxlmv")]
+spawnTime = 30.0
+spawnerDuration = 31.0
+objectToSpawn = ExtResource("8_n32jl")
+spawnUp = true
+
+[node name="Tutorial1" type="Node2D" parent="."]
+
+[node name="Tutorial1" type="Label" parent="Tutorial1" node_paths=PackedStringArray("nextWave")]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 51.0
+offset_top = 99.0
+offset_right = 249.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0235294, 0.0588235, 0.0509804, 1)
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_kd0ks")
+text = "Move: Arrow Keys
+Dash: Shift
+Shoot: Z Key"
+horizontal_alignment = 1
+script = ExtResource("10_sg64s")
+nextWave = NodePath("../../Wave1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial1/Tutorial1"]
+libraries = {
+"": SubResource("AnimationLibrary_4t0q0")
+}
+autoplay = "fadeIn"
+
+[node name="Wave1" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="EnemySpawner" parent="Wave1" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 3.0
+spawnerDuration = 5.0
+objectToSpawn = ExtResource("9_nuaoy")
+spawnPosition = Vector2(146, 0)
+isShadow = true
+alpha = 0.8
+projectileSpawnTime = 0.1
+spawnerTimer = 2.0
+nextWave = NodePath("../../Wave2")
+
+[node name="Wave2" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave2" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 3.0
+spawnerDuration = 9.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnUp = true
+isShadow = true
+nextWave = NodePath("../../Tutorial2")
+
+[node name="Tutorial2" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Tutorial2" type="Label" parent="Tutorial2" node_paths=PackedStringArray("nextWave")]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = 99.0
+offset_right = 252.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0235294, 0.0588235, 0.0509804, 1)
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_sn7mp")
+text = "
+World Switch: X Key"
+horizontal_alignment = 1
+script = ExtResource("10_sg64s")
+nextWave = NodePath("../../Wave3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial2/Tutorial2"]
+libraries = {
+"": SubResource("AnimationLibrary_4t0q0")
+}
+autoplay = "fadeIn"
+
+[node name="Wave3" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave3" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 4.0
+spawnerDuration = 6.0
+objectToSpawn = ExtResource("9_nuaoy")
+spawnPosition = Vector2(146, 0)
+isShadow = true
+alpha = 1.3
+projectileSpawnTime = 0.01
+spawnerTimer = 2.0
+nextWave = NodePath("../../Wave4")
+
+[node name="Wave4" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave4" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 4.0
+spawnerDuration = 6.0
+objectToSpawn = ExtResource("9_nuaoy")
+spawnPosition = Vector2(146, 0)
+alpha = 1.3
+projectileSpawnTime = 0.01
+spawnerTimer = 1.0
+nextWave = NodePath("../../Tutorial3")
+
+[node name="Tutorial3" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Tutorial3" type="Label" parent="Tutorial3" node_paths=PackedStringArray("nextWave")]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 99.0
+offset_right = 250.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0235294, 0.0588235, 0.0509804, 1)
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_sn7mp")
+text = "Press C Key
+If 2 Elements
+Are Collected"
+horizontal_alignment = 1
+script = ExtResource("10_sg64s")
+nextWave = NodePath("../../Wave5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial3/Tutorial3"]
+libraries = {
+"": SubResource("AnimationLibrary_4t0q0")
+}
+autoplay = "fadeIn"
+
+[node name="Wave5" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave5" instance=ExtResource("7_oxlmv")]
+spawnTime = 4.0
+spawnerDuration = 12.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnRight = true
+
+[node name="Spawner2" parent="Wave5" node_paths=PackedStringArray("nextWave") instance=ExtResource("7_oxlmv")]
+spawnTime = 8.0
+spawnerDuration = 16.0
+objectToSpawn = ExtResource("10_3tdu4")
+spawnLeft = true
+isShadow = true
+nextWave = NodePath("../../Tutorial4")
+
+[node name="Tutorial4" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Tutorial4" type="Label" parent="Tutorial4" node_paths=PackedStringArray("nextWave")]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 99.0
+offset_right = 250.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0235294, 0.0588235, 0.0509804, 1)
+theme_override_fonts/font = ExtResource("4_qfalc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_sn7mp")
+text = "Dispose Unwanted
+Elements With
+A and S Key"
+horizontal_alignment = 1
+script = ExtResource("10_sg64s")
+nextWave = NodePath("../../Wave6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial4/Tutorial4"]
+libraries = {
+"": SubResource("AnimationLibrary_4t0q0")
+}
+autoplay = "fadeIn"
+
+[node name="Wave6" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave6" instance=ExtResource("7_oxlmv")]
+spawnTime = 3.0
+spawnerDuration = 4.0
+objectToSpawn = ExtResource("9_nuaoy")
+spawnPosition = Vector2(300, 0)
+isShadow = true
+alpha = 1.6
+projectileSpawnTime = 0.05
+spawnerTimer = 15.0
+
+[node name="Spawner2" parent="Wave6" instance=ExtResource("7_oxlmv")]
+spawnTime = 10.0
+spawnerDuration = 16.0
+objectToSpawn = ExtResource("9_nuaoy")
+alpha = 2.2
+projectileSpawnTime = 0.05
+spawnerTimer = 10.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 350)
+script = ExtResource("13_ganpy")
+speed = -30
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+texture = ExtResource("7_67xcf")
+centered = false
+
+[connection signal="animation_finished" from="Tutorial1/Tutorial1/AnimationPlayer" to="Tutorial1/Tutorial1" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Tutorial2/Tutorial2/AnimationPlayer" to="Tutorial2/Tutorial2" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Tutorial3/Tutorial3/AnimationPlayer" to="Tutorial3/Tutorial3" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Tutorial4/Tutorial4/AnimationPlayer" to="Tutorial4/Tutorial4" method="_on_animation_player_animation_finished"]

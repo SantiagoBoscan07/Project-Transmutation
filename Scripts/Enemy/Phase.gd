@@ -1,21 +1,10 @@
 extends State
 
-@export var projectiles: Node2D
-@export var alpha: float
-@export var spawnTime: float
-@export var nextPhase: State
-@export var move: Node2D
-@export var canMove: bool
-@export var moveSpeed: Vector2
-@export var isShadow: bool = false
 
 func enter():
 	super.enter()
-	projectiles.alpha = alpha
-	projectiles.spawnTime = spawnTime
-	projectiles.isShadow = isShadow
 	if canMove:
-		move.horizontalMovement = canMove
+		move.collisionMovement = canMove
 		move.velocity = moveSpeed
 	else:
 		move.horizontalMovement = canMove

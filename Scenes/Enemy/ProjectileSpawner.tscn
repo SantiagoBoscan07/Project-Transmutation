@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/enemyprojectilespawner.gd" id="1_rkhdh"]
 [ext_resource type="PackedScene" uid="uid://cige4n3p5oet7" path="res://Scenes/Enemy/EnemyProjectile.tscn" id="2_oay3s"]
 
-[node name="ProjectileSpawner" type="Node2D" node_paths=PackedStringArray("spawnTimer")]
+[node name="ProjectileSpawner" type="Node2D" node_paths=PackedStringArray("spawnTimer") groups=["ProjectileSpawner"]]
 script = ExtResource("1_rkhdh")
 enemyProjectilePreload = ExtResource("2_oay3s")
 spawnTimer = NodePath("SpawnTimer")

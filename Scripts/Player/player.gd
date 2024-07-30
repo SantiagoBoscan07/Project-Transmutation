@@ -3,8 +3,7 @@ class_name Player
 @export var normal_speed = 100.0
 @export var acceleration = 100.0
 @onready var health = $Components/Health
-@onready var lightFlash = $Components/LightFlash
-@onready var shadowFlash = $Components/ShadowFlash
+@onready var flash = $Components/Flash
 @onready var hurtbox_light = $Areas/HurtboxLight
 @onready var hurtbox_shadow = $Areas/HurtboxShadow
 
@@ -13,10 +12,10 @@ var max_speed
 func _ready():
 	max_speed = normal_speed
 	hurtbox_light.hurt.connect(func(hitbox: Hitbox):
-		lightFlash.flash()
+		flash._flash()
 		)
 	hurtbox_shadow.hurt.connect(func(hitbox: Hitbox):
-		shadowFlash.flash()
+		flash._flash()
 		)
 	health.no_health.connect(die)
 
