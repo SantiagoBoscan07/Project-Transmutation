@@ -5,6 +5,9 @@ var sum = 0
 @export var frame1: Node2D
 @export var frame2: Node2D
 @export var frame3: Node2D
+@onready var transmuteSound = $"../../Sounds/Transmute"
+@onready var disposeSound = $"../../Sounds/Dispose"
+
 
 func _ready():
 	itemSlots.resize(2)
@@ -80,6 +83,7 @@ func _unhandled_input(event):
 			itemSlots[0] = null
 			hidePortray(itemSlots[1], frame2)
 			itemSlots[1] = null
+			transmuteSound.play_with_variance()
 			match sum:
 				2:
 					Signals.barrier.emit()
@@ -92,11 +96,13 @@ func _unhandled_input(event):
 		if itemSlots[0] != null:
 			hidePortray(itemSlots[0], frame1)
 			itemSlots[0] = null
+			disposeSound.play_with_variance()
 			if sum != 0:
 				removeResultant(sum)
 	if event.is_action_pressed("dispose_second"):
 		if itemSlots[1] != null:
 			hidePortray(itemSlots[1], frame2)
 			itemSlots[1] = null
+			disposeSound.play_with_variance()
 			if sum != 0:
 				removeResultant(sum)

@@ -5,7 +5,7 @@ class_name SpawnerNode
 @onready var projectileSpawnerDuration = $"../ProjectileSpawnerDuration"
 var instance
 
-func spawn(position: int, isShadow: bool,alpha: float,spawnTime: float, projectileSpawnerTime: float, global_spawn_position: Vector2 = global_position, parent: Node = get_tree().current_scene) -> Node:
+func spawn(position: int, isShadow: bool,alpha: float,spawnTime: float, projectileSpawnerTime: float, global_spawn_position: Vector2 = global_position, parent: Node2D = get_tree().current_scene) -> Node:
 	assert(scene is PackedScene, "Error: The scene export was never set")
 	instance = scene.instantiate()
 	if instance.is_in_group("Enemy"):

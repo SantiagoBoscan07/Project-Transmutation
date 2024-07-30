@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv50o5btqdkob"]
+
+[ext_resource type="Script" path="res://Scripts/Misc/GlobalSounds.gd" id="1_smwpe"]
+[ext_resource type="AudioStream" uid="uid://bbu0p75c3ihe1" path="res://SoundEffects/enemyDie.wav" id="2_a2ocg"]
+[ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="3_6dc5d"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_smwpe")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="Die" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("2_a2ocg")
+bus = &"Sound"
+script = ExtResource("3_6dc5d")
+pitch_min = 2.5
+pitch_max = 2.8
+
+[node name="Music" type="Node" parent="."]

@@ -9,6 +9,7 @@ class_name dashPlayerComponent
 @export var ghost_timer: Timer
 @export var hurtboxLight: Area2D
 @export var hurtboxShadow: Area2D
+@onready var dashSound = $"../../Sounds/Dash"
 var canDash: bool = true
 var boostSpeed
 var ghost
@@ -20,6 +21,7 @@ func _physics_process(delta):
 
 
 func boost():
+	dashSound.play_with_variance()
 	hurtboxLight.is_invicible = true
 	hurtboxShadow.is_invicible = true
 	if ModeManager.current_mode == 0:

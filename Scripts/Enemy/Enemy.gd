@@ -21,11 +21,12 @@ var randomDirection: bool:
 		randomDirection = value
 @onready var lightSprite = $Body/Sprite/Light
 @onready var shadowSprite = $Body/Sprite/Shadow
-
+@onready var hurtSound = $Sounds/Hurt
 
 
 func _ready():
 	hurtbox.hurt.connect(func(hitbox: Hitbox):
+		hurtSound.play_with_variance()
 		flash._flash()
 		)
 	health.no_health.connect(die)
@@ -36,9 +37,10 @@ func _ready():
 	randomDirection = bool(randi() % 2)
 
 func die():
+	MusicManager.playDie()
 	queue_free()
 
 
 func _on_visible_on_screen_enabler_2d_screen_exited():
-	print("death")
+	print("die")
 	queue_free()

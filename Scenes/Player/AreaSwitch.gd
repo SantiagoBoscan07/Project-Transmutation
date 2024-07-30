@@ -4,6 +4,7 @@ extends Node2D
 @export var lightArea: Area2D
 @export var shadowArea: Area2D
 
+
 func _ready():
 	switch(ModeManager.current_mode)
 	ModeManager.mode_switch.connect(switch)

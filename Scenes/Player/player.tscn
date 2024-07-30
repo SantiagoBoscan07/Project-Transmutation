@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c18joa412x5n3"]
+[gd_scene load_steps=35 format=3 uid="uid://c18joa412x5n3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1aa2o"]
 [ext_resource type="Texture2D" uid="uid://cnn1dw3c645gp" path="res://Sprites/mcdraft2.png" id="2_isw2c"]
@@ -19,6 +19,12 @@
 [ext_resource type="Script" path="res://Scenes/Player/AreaSwitch.gd" id="15_dd54t"]
 [ext_resource type="Script" path="res://Scripts/Player/Barrier.gd" id="16_uihej"]
 [ext_resource type="Script" path="res://Scripts/Player/BarrierHurt.gd" id="17_hndc8"]
+[ext_resource type="Script" path="res://Scripts/Player/switchSound.gd" id="18_3o6mr"]
+[ext_resource type="AudioStream" uid="uid://mqiyc382j0gy" path="res://SoundEffects/shoot.wav" id="20_a5fqb"]
+[ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="20_befmr"]
+[ext_resource type="AudioStream" uid="uid://djofuf7n3wi26" path="res://SoundEffects/dash.wav" id="22_wcura"]
+[ext_resource type="AudioStream" uid="uid://bs30tjftpff2v" path="res://SoundEffects/playerhurt.wav" id="23_xxl4t"]
+[ext_resource type="AudioStream" uid="uid://np0yam2np15i" path="res://SoundEffects/switch.wav" id="24_bnxsx"]
 
 [sub_resource type="Animation" id="Animation_22275"]
 length = 0.001
@@ -222,6 +228,9 @@ sprite = NodePath("../../Body/Barrier")
 script = ExtResource("17_hndc8")
 hurtbox = NodePath("../../Areas/HurtboxBarrier")
 
+[node name="Switch" type="Node" parent="Components"]
+script = ExtResource("18_3o6mr")
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="DashTimer" type="Timer" parent="Timers"]
@@ -294,6 +303,36 @@ shape = SubResource("CircleShape2D_u2a40")
 script = ExtResource("15_dd54t")
 lightArea = NodePath("../HurtboxLight")
 shadowArea = NodePath("../HurtboxShadow")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Shoot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_a5fqb")
+bus = &"Sound"
+script = ExtResource("20_befmr")
+pitch_min = 1.8
+pitch_max = 2.0
+
+[node name="Dash" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_wcura")
+bus = &"Sound"
+script = ExtResource("20_befmr")
+pitch_min = 2.5
+pitch_max = 2.7
+
+[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("23_xxl4t")
+bus = &"Sound"
+script = ExtResource("20_befmr")
+pitch_min = 2.3
+pitch_max = 2.5
+
+[node name="Switch" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("24_bnxsx")
+bus = &"Sound"
+script = ExtResource("20_befmr")
+pitch_min = 1.5
+pitch_max = 1.8
 
 [connection signal="timeout" from="Timers/DashTimer" to="Components/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/GhostTimer" to="Components/Dash" method="_on_ghost_timer_timeout"]

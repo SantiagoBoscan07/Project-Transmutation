@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://efew5cqtfky1"]
+[gd_scene load_steps=14 format=3 uid="uid://efew5cqtfky1"]
 
 [ext_resource type="Texture2D" uid="uid://bsfenqwpxdkxu" path="res://Sprites/frame.png" id="1_hem1t"]
 [ext_resource type="Texture2D" uid="uid://dmjns00y66vms" path="res://Sprites/items1.png" id="2_rrejs"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://csjxlfl0317ig" path="res://Sprites/resultsitems3.png" id="8_1r03b"]
 [ext_resource type="Texture2D" uid="uid://cyio3eimlbs6f" path="res://Sprites/resultsitems2.png" id="9_xlgpb"]
 [ext_resource type="Script" path="res://Scripts/Items/elementManager.gd" id="10_lx56f"]
+[ext_resource type="AudioStream" uid="uid://xgfi54wdl1g4" path="res://SoundEffects/transmute.wav" id="11_n1h2k"]
+[ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="12_b0srg"]
+[ext_resource type="AudioStream" uid="uid://bj1f3dsoivats" path="res://SoundEffects/dispose.wav" id="13_renaw"]
 
 [node name="ElementManager" type="Control"]
 layout_mode = 3
@@ -137,3 +140,19 @@ script = ExtResource("10_lx56f")
 frame1 = NodePath("../../Item1")
 frame2 = NodePath("../../Item2")
 frame3 = NodePath("../../Item3")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Transmute" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_n1h2k")
+bus = &"Sound"
+script = ExtResource("12_b0srg")
+pitch_min = 2.8
+pitch_max = 3.0
+
+[node name="Dispose" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_renaw")
+bus = &"Sound"
+script = ExtResource("12_b0srg")
+pitch_min = 1.5
+pitch_max = 1.8

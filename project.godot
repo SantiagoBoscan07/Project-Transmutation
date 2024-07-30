@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 Signals="*res://Scripts/Global/Signals.gd"
 ModeManager="*res://Scripts/Misc/ModeManager.gd"
+MusicManager="*res://Scenes/Misc/MusicManager.tscn"
 
 [display]
 

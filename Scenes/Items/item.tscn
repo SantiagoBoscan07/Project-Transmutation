@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkshbhow8ihs1"]
+[gd_scene load_steps=13 format=3 uid="uid://bkshbhow8ihs1"]
 
 [ext_resource type="Texture2D" uid="uid://dmjns00y66vms" path="res://Sprites/items1.png" id="1_8mwtg"]
 [ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_t8fuh"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://do0om33valwqa" path="res://Sprites/items4.png" id="4_bcluc"]
 [ext_resource type="Script" path="res://Scripts/Enemy/enemyMove.gd" id="7_qs4nl"]
 [ext_resource type="Script" path="res://Scripts/Items/itemSpriteManager.gd" id="8_x6axv"]
+[ext_resource type="AudioStream" uid="uid://dhi5hrlti3rn0" path="res://SoundEffects/itemCollected.wav" id="10_1g1ks"]
+[ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="11_skrl5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ohy2d"]
 radius = 17.0294
@@ -76,5 +78,14 @@ fireSprite = NodePath("../../Body/Main/Fire")
 waterSprite = NodePath("../../Body/Main/Water")
 earthSprite = NodePath("../../Body/Main/Earth")
 airSprite = NodePath("../../Body/Main/Air")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="itemCollected" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_1g1ks")
+bus = &"Sound"
+script = ExtResource("11_skrl5")
+pitch_min = 2.0
+pitch_max = 2.3
 
 [connection signal="screen_exited" from="Body/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

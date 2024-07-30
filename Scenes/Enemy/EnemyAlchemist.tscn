@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://clhdamhhkqes4"]
+[gd_scene load_steps=24 format=3 uid="uid://clhdamhhkqes4"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.gd" id="1_s4dcg"]
 [ext_resource type="Texture2D" uid="uid://y1whjhccwyeh" path="res://Sprites/enemy1.png" id="2_kdync"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/FourthPhase.gd" id="10_ysutw"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hitbox.gd" id="11_w5etv"]
 [ext_resource type="Script" path="res://Scripts/Misc/Hurtbox.gd" id="12_orlj0"]
+[ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="19_nsi22"]
+[ext_resource type="AudioStream" uid="uid://dmlw8wx31q3fy" path="res://SoundEffects/enemyhurt.wav" id="20_8qh0v"]
 
 [sub_resource type="Animation" id="Animation_jn7op"]
 length = 0.001
@@ -203,7 +205,7 @@ sprite = NodePath("../../Body/Sprite")
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("11_w5etv")
-damage = 9999
+damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Hitbox"]
 visible = false
@@ -217,5 +219,14 @@ script = ExtResource("12_orlj0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Hurtbox"]
 visible = false
 shape = SubResource("CircleShape2D_x1kpk")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_8qh0v")
+bus = &"Sound"
+script = ExtResource("19_nsi22")
+pitch_min = 2.0
+pitch_max = 2.3
 
 [connection signal="screen_exited" from="Body/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

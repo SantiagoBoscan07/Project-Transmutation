@@ -7,6 +7,8 @@ class_name playerShootComponent
 @export var shootTimer: Timer
 @export var multipleShootTimer: Timer
 @onready var projectilePreload: PackedScene = preload("res://Scenes/Player/PlayerProjectile.tscn")
+@onready var shootSound = $"../../Sounds/Shoot"
+
 var canShoot: bool = true
 var multipleShoot: bool = false
 var projectile
@@ -25,6 +27,7 @@ func activateLaser():
 
 func shoot():
 	shootTimer.start()
+	shootSound.play_with_variance()
 	projectile = projectilePreload.instantiate()
 	projectile.position = shootPoint.global_position
 	get_tree().current_scene.add_child(projectile)
