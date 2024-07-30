@@ -96,6 +96,7 @@ offset_top = -304.0
 offset_bottom = -304.0
 
 [node name="FPS" type="RichTextLabel" parent="."]
+visible = false
 z_index = 10
 offset_left = 239.0
 offset_top = 2.0
@@ -105,6 +106,7 @@ theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("9_luo7i")
 
 [node name="ItemSpawner" parent="." instance=ExtResource("10_jk1pr")]
+visible = false
 spawnTime = 6.0
 spawnerDuration = 138.0
 objectToSpawn = ExtResource("11_5mpbb")

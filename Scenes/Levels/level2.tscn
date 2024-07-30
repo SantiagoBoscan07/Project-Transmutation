@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="11_f3mcf"]
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="11_lsdrh"]
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_2usex"]
-[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="14_ibsfn"]
+[ext_resource type="Texture2D" uid="uid://hoysw85dpuh4" path="res://Sprites/bg-stalagmites-lvl-2.png" id="16_4xlpi"]
 [ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="16_vf5s0"]
 [ext_resource type="Script" path="res://Scripts/UI/levelStart.gd" id="17_24kgk"]
 
@@ -288,14 +288,14 @@ isShadow = true
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(0, 350)
+modulate = Color(1, 1, 1, 0.490196)
+motion_mirroring = Vector2(0, 900)
 script = ExtResource("13_2usex")
 speed = -30
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(1, 1, 1, 0.196078)
 z_index = -1
-texture = ExtResource("14_ibsfn")
+texture = ExtResource("16_4xlpi")
 centered = false
 
 [node name="levelMusic" type="Node" parent="."]
