@@ -10,12 +10,16 @@ func _unhandled_input(event):
 	if event.is_action_pressed("move_down") and option == 1 and Globals.isPaused:
 		option += 1
 		flaskCursor.position = Vector2(61,187)
-	if event.is_action_pressed("space") and Globals.isPaused:
+	if event.is_action_pressed("confirm") and Globals.isPaused:
 		match(option):
 			1:
-				print("option 1")
+				restartScene()
 			2:
 				print("option 2")
 			_:
 				print("something wrong happened, please try again")
 
+func restartScene():
+	Engine.time_scale = 1
+	Globals.isPaused = false
+	get_tree().reload_current_scene()

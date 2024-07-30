@@ -109,6 +109,7 @@ offset_right = 40.0
 offset_bottom = 344.0
 
 [node name="PauseScreen" parent="Player UI" instance=ExtResource("2_bktg1")]
+visible = false
 layout_mode = 1
 offset_top = -304.0
 offset_bottom = -304.0
