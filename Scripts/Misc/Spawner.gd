@@ -44,7 +44,8 @@ func handle_spawn(object: PackedScene):
 
 
 func _on_spawn_time_timeout():
-	handle_spawn(objectToSpawn)
+	if objectToSpawn:
+		handle_spawn(objectToSpawn)
 
 
 func _on_spawner_duration_timeout():

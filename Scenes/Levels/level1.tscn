@@ -97,7 +97,7 @@ scale = Vector2(15.05, 18.85)
 
 [node name="Player" parent="." instance=ExtResource("1_w4ox6")]
 texture_filter = 1
-position = Vector2(150, 276)
+position = Vector2(150, 280)
 
 [node name="Player UI" type="Control" parent="."]
 z_index = 2

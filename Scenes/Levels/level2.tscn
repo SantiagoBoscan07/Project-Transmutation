@@ -1,0 +1,268 @@
+[gd_scene load_steps=16 format=3 uid="uid://beuu73htaunx0"]
+
+[ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_1fbsw"]
+[ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_6tf0p"]
+[ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_1828s"]
+[ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_ujq75"]
+[ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_61s2k"]
+[ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="6_ny807"]
+[ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="7_urswo"]
+[ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="8_14ahl"]
+[ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="9_hfnnv"]
+[ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="11_f3mcf"]
+[ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="11_lsdrh"]
+[ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_2usex"]
+[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="14_ibsfn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[node name="Level2" type="Node2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(149.5, 160.5)
+scale = Vector2(15.05, 18.85)
+
+[node name="Player" parent="." instance=ExtResource("1_1fbsw")]
+texture_filter = 1
+position = Vector2(150, 280)
+
+[node name="Player UI" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_top = 304.0
+offset_right = 40.0
+offset_bottom = 344.0
+
+[node name="PlayerPanel" type="Panel" parent="Player UI"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 46.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfhqw")
+
+[node name="ProgressBar" parent="Player UI/PlayerPanel" instance=ExtResource("2_6tf0p")]
+offset_left = 56.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 44.0
+
+[node name="HealthBar" type="Control" parent="Player UI/PlayerPanel" node_paths=PackedStringArray("healthBar", "player")]
+anchors_preset = 0
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 61.0
+offset_bottom = 43.0
+script = ExtResource("3_1828s")
+healthBar = NodePath("Label")
+player = NodePath("../../../Player")
+
+[node name="Label" type="Label" parent="Player UI/PlayerPanel/HealthBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 46.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("4_ujq75")
+theme_override_font_sizes/font_size = 32
+text = "HP:
+100"
+horizontal_alignment = 1
+
+[node name="ElementManager" parent="Player UI/PlayerPanel" instance=ExtResource("5_61s2k")]
+
+[node name="TimerPanel" type="Panel" parent="Player UI"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -305.0
+offset_right = 301.0
+offset_bottom = -277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_biafh")
+
+[node name="LevelTimer" type="Timer" parent="Player UI/TimerPanel"]
+wait_time = 80.0
+one_shot = true
+
+[node name="TimerManager" type="Node" parent="Player UI/TimerPanel" node_paths=PackedStringArray("label", "levelTimer")]
+script = ExtResource("6_ny807")
+label = NodePath("../Label")
+levelTimer = NodePath("../LevelTimer")
+
+[node name="Label" type="Label" parent="Player UI/TimerPanel"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 301.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_fonts/font = ExtResource("4_ujq75")
+theme_override_font_sizes/font_size = 32
+text = "01:55"
+horizontal_alignment = 1
+
+[node name="FPS" type="RichTextLabel" parent="."]
+z_index = 10
+offset_left = 239.0
+offset_top = 2.0
+offset_right = 300.0
+offset_bottom = 33.0
+theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
+script = ExtResource("7_urswo")
+
+[node name="ItemSpawner" parent="." instance=ExtResource("8_14ahl")]
+spawnTime = 10.0
+spawnerDuration = 70.0
+objectToSpawn = ExtResource("9_hfnnv")
+spawnUp = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(2, 123)
+
+[node name="Wave1" type="Node2D" parent="."]
+
+[node name="EnemySpawner" parent="Wave1" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(33, 60)
+isShadow = true
+alpha = 1.3
+projectileSpawnTime = 0.06
+spawnerTimer = 10.0
+
+[node name="EnemySpawner2" parent="Wave1" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(267, 60)
+alpha = 1.6
+projectileSpawnTime = 0.06
+spawnerTimer = 10.0
+
+[node name="EnemySpawner3" parent="Wave1" node_paths=PackedStringArray("nextWave") instance=ExtResource("8_14ahl")]
+spawnTime = 1.0
+spawnerDuration = 13.0
+nextWave = NodePath("../../Wave2")
+
+[node name="Wave2" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave2" instance=ExtResource("8_14ahl")]
+spawnTime = 10.0
+spawnerDuration = 11.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(150, 44)
+isShadow = true
+alpha = 1.8
+projectileSpawnTime = 0.08
+spawnerTimer = 10.0
+
+[node name="Spawner2" parent="Wave2" instance=ExtResource("8_14ahl")]
+spawnTime = 5.0
+spawnerDuration = 20.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnLeft = true
+
+[node name="Spawner3" parent="Wave2" node_paths=PackedStringArray("nextWave") instance=ExtResource("8_14ahl")]
+spawnTime = 5.0
+spawnerDuration = 20.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnRight = true
+nextWave = NodePath("../../Wave3")
+
+[node name="Wave3" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave3" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(40, 58)
+alpha = 2.6
+projectileSpawnTime = 0.055
+spawnerTimer = 8.0
+
+[node name="Spawner2" parent="Wave3" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(260, 58)
+isShadow = true
+alpha = 2.4
+projectileSpawnTime = 0.055
+spawnerTimer = 8.0
+
+[node name="EnemySpawner3" parent="Wave3" node_paths=PackedStringArray("nextWave") instance=ExtResource("8_14ahl")]
+spawnTime = 1.0
+spawnerDuration = 10.0
+nextWave = NodePath("../../Wave4")
+
+[node name="Wave4" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="Spawner" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(2, 250)
+isShadow = true
+projectileSpawnTime = 0.5
+spawnerTimer = 15.0
+
+[node name="Spawner2" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(2, 200)
+projectileSpawnTime = 0.5
+spawnerTimer = 15.0
+
+[node name="Spawner3" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(2, 150)
+isShadow = true
+projectileSpawnTime = 0.5
+spawnerTimer = 15.0
+
+[node name="Spawner4" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 2.0
+spawnerDuration = 2.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(2, 100)
+projectileSpawnTime = 0.5
+spawnerTimer = 15.0
+
+[node name="Spawner5" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 4.0
+spawnerDuration = 16.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnUp = true
+
+[node name="Spawner6" parent="Wave4" instance=ExtResource("8_14ahl")]
+spawnTime = 7.0
+spawnerDuration = 19.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnUp = true
+isShadow = true
+
+[node name="Wave5" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 350)
+script = ExtResource("13_2usex")
+speed = -30
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+texture = ExtResource("14_ibsfn")
+centered = false
