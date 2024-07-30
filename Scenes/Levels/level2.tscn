@@ -95,6 +95,7 @@ offset_top = -304.0
 offset_bottom = -304.0
 
 [node name="FPS" type="RichTextLabel" parent="."]
+visible = false
 z_index = 10
 offset_left = 239.0
 offset_top = 2.0
@@ -104,13 +105,16 @@ theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("7_urswo")
 
 [node name="ItemSpawner" parent="." instance=ExtResource("8_14ahl")]
-spawnTime = 10.0
-spawnerDuration = 70.0
+spawnTime = 5.0
+spawnerDuration = 80.0
 objectToSpawn = ExtResource("9_hfnnv")
 spawnUp = true
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(256, 24)
+[node name="ItemSpawner2" parent="." instance=ExtResource("8_14ahl")]
+spawnTime = 8.25
+spawnerDuration = 60.0
+objectToSpawn = ExtResource("9_hfnnv")
+spawnUp = true
 
 [node name="Wave1" type="Node2D" parent="."]
 
@@ -265,14 +269,14 @@ projectileSpawnTime = 0.08
 spawnerTimer = 20.0
 
 [node name="Spawner3" parent="Wave5" instance=ExtResource("8_14ahl")]
-spawnTime = 10.0
+spawnTime = 5.0
 spawnerDuration = 20.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 
 [node name="Spawner4" parent="Wave5" instance=ExtResource("8_14ahl")]
-spawnTime = 15.0
-spawnerDuration = 16.0
+spawnTime = 10.0
+spawnerDuration = 20.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 isShadow = true

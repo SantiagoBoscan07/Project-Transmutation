@@ -164,6 +164,7 @@ offset_bottom = -276.0
 levelTime = 80.0
 
 [node name="FPS" type="RichTextLabel" parent="."]
+visible = false
 z_index = 10
 offset_left = 239.0
 offset_top = 2.0

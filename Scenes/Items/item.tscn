@@ -64,7 +64,7 @@ shape = SubResource("CircleShape2D_ohy2d")
 [node name="MoveObject" type="Node" parent="Component" node_paths=PackedStringArray("body")]
 script = ExtResource("7_qs4nl")
 body = NodePath("../..")
-velocity = Vector2(0, 30)
+velocity = Vector2(0, 80)
 
 [node name="ItemBehavior" type="Node2D" parent="Component" node_paths=PackedStringArray("sprite", "idle", "hurtbox")]
 script = ExtResource("3_1fmqs")
