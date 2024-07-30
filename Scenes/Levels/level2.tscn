@@ -253,14 +253,14 @@ projectileSpawnTime = 0.5
 spawnerTimer = 15.0
 
 [node name="Spawner5" parent="Wave4" instance=ExtResource("8_14ahl")]
-spawnTime = 4.0
-spawnerDuration = 16.0
+spawnTime = 7.0
+spawnerDuration = 14.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 
 [node name="Spawner6" parent="Wave4" instance=ExtResource("8_14ahl")]
-spawnTime = 7.0
-spawnerDuration = 19.0
+spawnTime = 5.0
+spawnerDuration = 15.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 isShadow = true
