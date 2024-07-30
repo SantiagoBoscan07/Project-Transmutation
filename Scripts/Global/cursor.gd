@@ -14,6 +14,7 @@ func _unhandled_input(event):
 			flaskCursor.position = Vector2(61,187)
 	if event.is_action_pressed("confirm"):
 		if Globals.isPaused or Globals.isDead:
+			MusicManager.playConfirm()
 			match(option):
 				1:
 					restartScene()

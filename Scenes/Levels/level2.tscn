@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_1828s"]
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_ujq75"]
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_61s2k"]
-[ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="6_ny807"]
+[ext_resource type="PackedScene" uid="uid://b8i5detqyc1pt" path="res://Scenes/UI/timer_panel.tscn" id="6_xf72b"]
 [ext_resource type="PackedScene" uid="uid://c2wvs4m7tk0hf" path="res://Scenes/UI/pause_screen.tscn" id="7_spwta"]
 [ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="7_urswo"]
 [ext_resource type="PackedScene" uid="uid://c5t2wuaxcdrlk" path="res://Scenes/UI/game_over_screen.tscn" id="8_6a1il"]
@@ -15,11 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="11_lsdrh"]
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_2usex"]
 [ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="14_ibsfn"]
+[ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="16_vf5s0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
-bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
 
 [node name="Level2" type="Node2D"]
@@ -78,33 +76,11 @@ horizontal_alignment = 1
 
 [node name="ElementManager" parent="Player UI/PlayerPanel" instance=ExtResource("5_61s2k")]
 
-[node name="TimerPanel" type="Panel" parent="Player UI"]
+[node name="TimerPanel" parent="Player UI" instance=ExtResource("6_xf72b")]
 layout_mode = 0
-offset_left = -1.0
-offset_top = -305.0
-offset_right = 301.0
-offset_bottom = -277.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_biafh")
-
-[node name="LevelTimer" type="Timer" parent="Player UI/TimerPanel"]
-wait_time = 80.0
-one_shot = true
-
-[node name="TimerManager" type="Node" parent="Player UI/TimerPanel" node_paths=PackedStringArray("label", "levelTimer")]
-script = ExtResource("6_ny807")
-label = NodePath("../Label")
-levelTimer = NodePath("../LevelTimer")
-
-[node name="Label" type="Label" parent="Player UI/TimerPanel"]
-layout_mode = 0
-offset_top = 1.0
-offset_right = 301.0
-offset_bottom = 28.0
-theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
-theme_override_fonts/font = ExtResource("4_ujq75")
-theme_override_font_sizes/font_size = 32
-text = "01:55"
-horizontal_alignment = 1
+offset_top = -304.0
+offset_bottom = -276.0
+levelTime = 90.0
 
 [node name="PauseScreen" parent="Player UI" instance=ExtResource("7_spwta")]
 visible = false
@@ -134,7 +110,7 @@ objectToSpawn = ExtResource("9_hfnnv")
 spawnUp = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(2, 123)
+position = Vector2(256, 24)
 
 [node name="Wave1" type="Node2D" parent="."]
 
@@ -258,15 +234,48 @@ spawnerDuration = 14.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 
-[node name="Spawner6" parent="Wave4" instance=ExtResource("8_14ahl")]
+[node name="Spawner6" parent="Wave4" node_paths=PackedStringArray("nextWave") instance=ExtResource("8_14ahl")]
 spawnTime = 5.0
 spawnerDuration = 15.0
 objectToSpawn = ExtResource("11_f3mcf")
 spawnUp = true
 isShadow = true
+nextWave = NodePath("../../Wave5")
 
 [node name="Wave5" type="Node2D" parent="."]
 process_mode = 4
+
+[node name="Spawner" parent="Wave5" instance=ExtResource("8_14ahl")]
+spawnTime = 3.0
+spawnerDuration = 3.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(256, 24)
+isShadow = true
+alpha = 2.3
+projectileSpawnTime = 0.08
+spawnerTimer = 20.0
+
+[node name="Spawner2" parent="Wave5" instance=ExtResource("8_14ahl")]
+spawnTime = 3.0
+spawnerDuration = 3.0
+objectToSpawn = ExtResource("11_lsdrh")
+spawnPosition = Vector2(44, 24)
+alpha = 2.6
+projectileSpawnTime = 0.08
+spawnerTimer = 20.0
+
+[node name="Spawner3" parent="Wave5" instance=ExtResource("8_14ahl")]
+spawnTime = 10.0
+spawnerDuration = 20.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnUp = true
+
+[node name="Spawner4" parent="Wave5" instance=ExtResource("8_14ahl")]
+spawnTime = 15.0
+spawnerDuration = 16.0
+objectToSpawn = ExtResource("11_f3mcf")
+spawnUp = true
+isShadow = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -280,3 +289,6 @@ modulate = Color(1, 1, 1, 0.196078)
 z_index = -1
 texture = ExtResource("14_ibsfn")
 centered = false
+
+[node name="levelMusic" type="Node" parent="."]
+script = ExtResource("16_vf5s0")

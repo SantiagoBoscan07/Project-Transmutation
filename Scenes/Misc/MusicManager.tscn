@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv50o5btqdkob"]
+[gd_scene load_steps=6 format=3 uid="uid://dv50o5btqdkob"]
 
 [ext_resource type="Script" path="res://Scripts/Misc/GlobalSounds.gd" id="1_smwpe"]
 [ext_resource type="AudioStream" uid="uid://bbu0p75c3ihe1" path="res://SoundEffects/enemyDie.wav" id="2_a2ocg"]
 [ext_resource type="Script" path="res://Scripts/Misc/AudioManager.gd" id="3_6dc5d"]
-[ext_resource type="AudioStream" uid="uid://by0854vurtyr8" path="res://Music/main theme.mp3" id="4_312ax"]
+[ext_resource type="AudioStream" uid="uid://dkpamcecvrmd0" path="res://SoundEffects/confirm.wav" id="4_8qcne"]
+[ext_resource type="AudioStream" uid="uid://b802ucqi70cqu" path="res://Music/main theme.ogg" id="4_u4okc"]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource("1_smwpe")
@@ -17,9 +18,20 @@ script = ExtResource("3_6dc5d")
 pitch_min = 2.5
 pitch_max = 2.8
 
+[node name="confirm" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("4_8qcne")
+script = ExtResource("3_6dc5d")
+pitch_min = 1.3
+pitch_max = 1.5
+
 [node name="Music" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("4_312ax")
-autoplay = true
+[node name="main theme" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_u4okc")
 bus = &"Music"
+
+[node name="title screen" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_u4okc")
+script = ExtResource("3_6dc5d")
+pitch_min = 0.5
+pitch_max = 0.5

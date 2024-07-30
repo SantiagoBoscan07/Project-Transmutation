@@ -25,5 +25,6 @@ func _ready():
 
 func die():
 	MusicManager.playDie()
+	MusicManager.stopMainTheme()
 	Signals.gameOver.emit()
 	queue_free()

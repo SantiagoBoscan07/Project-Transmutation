@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8i5detqyc1pt"]
+
+[ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="1_fcoxx"]
+[ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="2_7kdna"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
+bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[node name="TimerPanel" type="Panel" node_paths=PackedStringArray("label", "levelTimer")]
+offset_right = 302.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_biafh")
+script = ExtResource("1_fcoxx")
+label = NodePath("Label")
+levelTimer = NodePath("LevelTimer")
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 301.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.101961, 0.0627451, 0.0862745, 1)
+theme_override_fonts/font = ExtResource("2_7kdna")
+theme_override_font_sizes/font_size = 32
+text = "01:55"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
