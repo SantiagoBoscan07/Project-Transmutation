@@ -27,6 +27,7 @@ Signals="*res://Scripts/Global/Signals.gd"
 ModeManager="*res://Scripts/Misc/ModeManager.gd"
 MusicManager="*res://Scenes/Misc/MusicManager.tscn"
 Globals="*res://Scripts/Global/Globals.gd"
+Transition="*res://Scenes/UI/transition.tscn"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c12j3furthfib"]
+[gd_scene load_steps=27 format=3 uid="uid://c12j3furthfib"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
 [ext_resource type="PackedScene" uid="uid://c2wvs4m7tk0hf" path="res://Scenes/UI/pause_screen.tscn" id="2_bktg1"]
@@ -13,10 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
 [ext_resource type="PackedScene" uid="uid://c5t2wuaxcdrlk" path="res://Scenes/UI/game_over_screen.tscn" id="8_vyc5i"]
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="9_nuaoy"]
+[ext_resource type="PackedScene" uid="uid://beuu73htaunx0" path="res://Scenes/Levels/level2.tscn" id="9_r6ubi"]
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="10_3tdu4"]
 [ext_resource type="Script" path="res://Scripts/Tutorial/tutorial1.gd" id="10_sg64s"]
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_ganpy"]
 [ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="17_jn1l6"]
+[ext_resource type="Script" path="res://Scripts/UI/levelStart.gd" id="18_8qxtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
@@ -162,6 +164,7 @@ layout_mode = 0
 offset_top = -304.0
 offset_bottom = -276.0
 levelTime = 80.0
+nextScene = ExtResource("9_r6ubi")
 
 [node name="FPS" type="RichTextLabel" parent="."]
 visible = false
@@ -186,6 +189,7 @@ objectToSpawn = ExtResource("8_n32jl")
 spawnUp = true
 
 [node name="Tutorial1" type="Node2D" parent="."]
+process_mode = 4
 
 [node name="Tutorial1" type="Label" parent="Tutorial1" node_paths=PackedStringArray("nextWave")]
 z_index = 2
@@ -425,6 +429,10 @@ centered = false
 
 [node name="levelMusic" type="Node" parent="."]
 script = ExtResource("17_jn1l6")
+
+[node name="levelStart" type="Node" parent="." node_paths=PackedStringArray("firstWave")]
+script = ExtResource("18_8qxtc")
+firstWave = NodePath("../Tutorial1")
 
 [connection signal="animation_finished" from="Tutorial1/Tutorial1/AnimationPlayer" to="Tutorial1/Tutorial1" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="Tutorial2/Tutorial2/AnimationPlayer" to="Tutorial2/Tutorial2" method="_on_animation_player_animation_finished"]

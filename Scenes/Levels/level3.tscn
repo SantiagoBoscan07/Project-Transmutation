@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcdx0ckgc84ab"]
+[gd_scene load_steps=19 format=3 uid="uid://dcdx0ckgc84ab"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_pnvil"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_kenif"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="14_hm7ym"]
 [ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="15_mrby7"]
 [ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="16_il5t0"]
+[ext_resource type="Script" path="res://Scripts/UI/levelStart.gd" id="17_dnnyt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfhqw"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
@@ -110,6 +111,7 @@ objectToSpawn = ExtResource("11_5mpbb")
 spawnUp = true
 
 [node name="Wave1" type="Node2D" parent="."]
+process_mode = 4
 
 [node name="EnemySpawner" parent="Wave1" instance=ExtResource("10_jk1pr")]
 spawnTime = 3.0
@@ -347,3 +349,7 @@ script = ExtResource("16_il5t0")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(256, 0)
+
+[node name="levelStart" type="Node" parent="." node_paths=PackedStringArray("firstWave")]
+script = ExtResource("17_dnnyt")
+firstWave = NodePath("../Wave1")
