@@ -1,35 +1,21 @@
-extends Sprite2D
+extends Node2D
+
+@export var flaskCursor: Sprite2D
 var option = 1
-var isPaused = false
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 func _unhandled_input(event):
-			
-		if event.is_action_pressed("move_up") and option == 2:
-			option -= 1
-			position.y -= 25
-			
-		if event.is_action_pressed("move_down") and option == 1:
-			option += 1
-			position.y += 25
-			
-		if event.is_action_pressed("space"):
-			match(option):
-				1:
-					print("option 1")
-				2:
-					print("option 2")
-				_:
-					print("something wrong happened, please try again")
-		
-		
-		
+	if event.is_action_pressed("move_up") and option == 2 and Globals.isPaused:
+		option -= 1
+		flaskCursor.position = Vector2(96,156)
+	if event.is_action_pressed("move_down") and option == 1 and Globals.isPaused:
+		option += 1
+		flaskCursor.position = Vector2(61,187)
+	if event.is_action_pressed("space") and Globals.isPaused:
+		match(option):
+			1:
+				print("option 1")
+			2:
+				print("option 2")
+			_:
+				print("something wrong happened, please try again")
+

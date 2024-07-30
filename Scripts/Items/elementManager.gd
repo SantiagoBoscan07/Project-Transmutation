@@ -77,7 +77,7 @@ func removeResultant(result):
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("transmute"):
+	if event.is_action_pressed("transmute") and !Globals.isPaused:
 		if sum != 0:
 			hidePortray(itemSlots[0], frame1)
 			itemSlots[0] = null
@@ -92,14 +92,14 @@ func _unhandled_input(event):
 				_:
 					Signals.heal.emit(10)
 			removeResultant(sum)
-	if event.is_action_pressed("dispose_first"):
+	if event.is_action_pressed("dispose_first") and !Globals.isPaused:
 		if itemSlots[0] != null:
 			hidePortray(itemSlots[0], frame1)
 			itemSlots[0] = null
 			disposeSound.play_with_variance()
 			if sum != 0:
 				removeResultant(sum)
-	if event.is_action_pressed("dispose_second"):
+	if event.is_action_pressed("dispose_second") and !Globals.isPaused:
 		if itemSlots[1] != null:
 			hidePortray(itemSlots[1], frame2)
 			itemSlots[1] = null

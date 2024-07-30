@@ -16,7 +16,7 @@ var ghost
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("dash") and canDash:
+	if Input.is_action_pressed("dash") and canDash and !Globals.isPaused:
 		boost()
 
 

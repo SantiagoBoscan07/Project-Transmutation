@@ -15,7 +15,7 @@ var current_mode = GameModes.LIGHT_MODE:
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("switch_mode"):
+	if event.is_action_pressed("switch_mode") and !Globals.isPaused:
 		switch_mode()
 
 

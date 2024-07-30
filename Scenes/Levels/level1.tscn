@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://c12j3furthfib"]
+[gd_scene load_steps=24 format=3 uid="uid://c12j3furthfib"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
+[ext_resource type="PackedScene" uid="uid://c2wvs4m7tk0hf" path="res://Scenes/UI/pause_screen.tscn" id="2_bktg1"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_fai5p"]
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_d5gea"]
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_qfalc"]
@@ -106,6 +107,11 @@ anchors_preset = 0
 offset_top = 304.0
 offset_right = 40.0
 offset_bottom = 344.0
+
+[node name="PauseScreen" parent="Player UI" instance=ExtResource("2_bktg1")]
+layout_mode = 1
+offset_top = -304.0
+offset_bottom = -304.0
 
 [node name="PlayerPanel" type="Panel" parent="Player UI"]
 layout_mode = 0

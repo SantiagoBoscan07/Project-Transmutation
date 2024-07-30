@@ -18,7 +18,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("shoot") and canShoot:
+	if Input.is_action_pressed("shoot") and canShoot and !Globals.isPaused:
 		shoot()
 
 func activateLaser():
