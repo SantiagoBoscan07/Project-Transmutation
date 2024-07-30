@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c12j3furthfib"]
+[gd_scene load_steps=26 format=3 uid="uid://c12j3furthfib"]
 
 [ext_resource type="PackedScene" uid="uid://c18joa412x5n3" path="res://Scenes/Player/player.tscn" id="1_w4ox6"]
 [ext_resource type="PackedScene" uid="uid://bkic2s7lstjwf" path="res://Scenes/UI/progress_bar.tscn" id="2_fai5p"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rxkmw"]
 [ext_resource type="Script" path="res://Scripts/UI/timerManager.gd" id="6_ahhdu"]
 [ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="6_w7fja"]
+[ext_resource type="Shader" path="res://Effects/background.gdshader" id="7_22y0q"]
 [ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="7_67xcf"]
 [ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_oxlmv"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
@@ -20,6 +21,11 @@ bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biafh"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp26j"]
+shader = ExtResource("7_22y0q")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pr4kh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd0ks"]
 bg_color = Color(0.92549, 0.964706, 0.956863, 0.784314)
@@ -172,6 +178,14 @@ theme_override_fonts/font = ExtResource("4_qfalc")
 theme_override_font_sizes/font_size = 32
 text = "01:55"
 horizontal_alignment = 1
+
+[node name="Background" type="Sprite2D" parent="Player UI"]
+modulate = Color(1, 1, 1, 0.298039)
+z_index = 10
+material = SubResource("ShaderMaterial_rp26j")
+position = Vector2(151.75, -128.25)
+scale = Vector2(304.5, 352.5)
+texture = SubResource("CanvasTexture_pr4kh")
 
 [node name="FPS" type="RichTextLabel" parent="."]
 z_index = 10

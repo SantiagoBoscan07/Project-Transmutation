@@ -1,6 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://khmgocrleqor"]
-
-[ext_resource type="Shader" path="res://Effects/whiteflash.gdshader" id="1_fpi3v"]
-
-[resource]
-shader = ExtResource("1_fpi3v")
