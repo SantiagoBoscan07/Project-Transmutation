@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Warthemists"
 config/description="Bullet Hell Game Developed for the Pirate Software Game Jam"
-run/main_scene="res://Scenes/Levels/level1.tscn"
+run/main_scene="res://Scenes/UI/intro.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0235294, 0.0588235, 0.0509804, 1)
