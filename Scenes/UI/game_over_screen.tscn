@@ -113,6 +113,7 @@ text = "RESTART"
 horizontal_alignment = 1
 
 [node name="Option2" type="Label" parent="ColorRect/Options"]
+visible = false
 layout_mode = 0
 offset_top = 175.0
 offset_right = 300.0

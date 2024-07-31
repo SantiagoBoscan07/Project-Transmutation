@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://chdoe7miagnvq" path="res://Scenes/Enemy/ProjectileSpawner.tscn" id="12_fim4f"]
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="13_u4fid"]
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="14_hm7ym"]
-[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="15_mrby7"]
+[ext_resource type="Texture2D" uid="uid://bh2maw3xi72k8" path="res://Sprites/bg-distortion-lvl-3.png" id="16_f5cb6"]
 [ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="16_il5t0"]
 [ext_resource type="Script" path="res://Scripts/UI/levelStart.gd" id="17_dnnyt"]
 
@@ -87,9 +87,7 @@ nextScene = ExtResource("7_0a7tp")
 
 [node name="PauseScreen" parent="Player UI" instance=ExtResource("7_110vs")]
 visible = false
-layout_mode = 1
-offset_top = -304.0
-offset_bottom = -304.0
+position = Vector2(0, -304)
 
 [node name="GameOverScreen" parent="Player UI" instance=ExtResource("8_w4uwk")]
 visible = false
@@ -338,14 +336,16 @@ spawnerTimer = 10.0
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(0, 350)
+motion_mirroring = Vector2(0, 450)
 script = ExtResource("14_hm7ym")
 speed = -30
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 modulate = Color(1, 1, 1, 0.196078)
 z_index = -1
-texture = ExtResource("15_mrby7")
+position = Vector2(-56, 0)
+scale = Vector2(1.04, 1)
+texture = ExtResource("16_f5cb6")
 centered = false
 
 [node name="levelMusic" type="Node" parent="."]

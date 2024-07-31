@@ -87,9 +87,7 @@ nextScene = ExtResource("7_lfxku")
 
 [node name="PauseScreen" parent="Player UI" instance=ExtResource("7_spwta")]
 visible = false
-layout_mode = 1
-offset_top = -304.0
-offset_bottom = -304.0
+position = Vector2(0, -304)
 
 [node name="GameOverScreen" parent="Player UI" instance=ExtResource("8_6a1il")]
 visible = false

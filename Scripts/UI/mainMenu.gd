@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var fadeEnd = false
 @export var level1: PackedScene

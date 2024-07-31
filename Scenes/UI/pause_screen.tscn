@@ -5,21 +5,28 @@
 [ext_resource type="Script" path="res://Scripts/Global/cursor.gd" id="3_8xe47"]
 [ext_resource type="Texture2D" uid="uid://b2tkfyj8crd6p" path="res://Sprites/flask_icon.png" id="3_mc3p3"]
 
-[node name="PauseScreen" type="Control"]
+[node name="PauseScreen" type="Node2D" node_paths=PackedStringArray("flaskCursor")]
 z_index = 10
+script = ExtResource("3_8xe47")
+flaskCursor = NodePath("ColorRect/FlaskCursor")
+
+[node name="Cursor" type="Node2D" parent="."]
+
+[node name="Pause" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_d7j2k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
 offset_right = 300.0
 offset_bottom = 350.0
 color = Color(0.0235294, 0.0588235, 0.0509804, 0.882353)
+
+[node name="FlaskCursor" type="Sprite2D" parent="ColorRect"]
+position = Vector2(96, 156)
+texture = ExtResource("3_mc3p3")
 
 [node name="Title" type="Label" parent="ColorRect"]
 layout_mode = 0
@@ -45,17 +52,19 @@ Press Esc to Resume"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_top = 244.0
 offset_right = 299.0
 offset_bottom = 270.0
 theme_override_colors/font_color = Color(0.92549, 0.964706, 0.956863, 1)
 theme_override_fonts/font = ExtResource("2_dih1u")
 theme_override_font_sizes/font_size = 32
-text = "Controllers
+text = "Controls
 "
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 271.0
 offset_right = 300.0
@@ -70,6 +79,7 @@ Pause: Esc Key
 "
 
 [node name="Label4" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 271.0
 offset_right = 300.0
@@ -100,6 +110,7 @@ text = "RESTART"
 horizontal_alignment = 1
 
 [node name="Option2" type="Label" parent="ColorRect/Options"]
+visible = false
 layout_mode = 0
 offset_top = 175.0
 offset_right = 300.0
@@ -109,11 +120,3 @@ theme_override_fonts/font = ExtResource("2_dih1u")
 theme_override_font_sizes/font_size = 32
 text = "BACK TO TITLE"
 horizontal_alignment = 1
-
-[node name="Cursor" type="Node2D" parent="ColorRect/Options" node_paths=PackedStringArray("flaskCursor")]
-script = ExtResource("3_8xe47")
-flaskCursor = NodePath("FlaskCursor")
-
-[node name="FlaskCursor" type="Sprite2D" parent="ColorRect/Options/Cursor"]
-position = Vector2(96, 156)
-texture = ExtResource("3_mc3p3")
