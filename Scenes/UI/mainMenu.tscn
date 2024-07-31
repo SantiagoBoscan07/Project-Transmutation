@@ -1,0 +1,201 @@
+[gd_scene load_steps=18 format=3 uid="uid://clgh43h86ceab"]
+
+[ext_resource type="Script" path="res://Scripts/UI/mainMenu.gd" id="1_8gnq7"]
+[ext_resource type="Texture2D" uid="uid://xgsneemdelhh" path="res://Sprites/logo.png" id="2_nd458"]
+[ext_resource type="Texture2D" uid="uid://ddj6kxggss6rg" path="res://Sprites/light_symbol.png" id="2_ol4eo"]
+[ext_resource type="PackedScene" uid="uid://c12j3furthfib" path="res://Scenes/Levels/level1.tscn" id="2_p15j3"]
+[ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="3_11fol"]
+[ext_resource type="Texture2D" uid="uid://8j3g6srf7vrm" path="res://Sprites/dark_symbol.png" id="3_v8tgb"]
+[ext_resource type="Script" path="res://Scripts/UI/background.gd" id="6_cxtvo"]
+[ext_resource type="Texture2D" uid="uid://hoysw85dpuh4" path="res://Sprites/bg-stalagmites-lvl-2.png" id="7_aylt0"]
+
+[sub_resource type="Animation" id="Animation_rmnr7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8t038"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wrb85"]
+_data = {
+"RESET": SubResource("Animation_rmnr7"),
+"idle": SubResource("Animation_8t038")
+}
+
+[sub_resource type="Animation" id="Animation_4piwm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_og87g"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41xg8"]
+_data = {
+"RESET": SubResource("Animation_4piwm"),
+"idle": SubResource("Animation_og87g")
+}
+
+[sub_resource type="Animation" id="Animation_i33tr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(45, 55)]
+}
+
+[sub_resource type="Animation" id="Animation_h3mel"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(45, 55), Vector2(45, 186)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ne60"]
+_data = {
+"RESET": SubResource("Animation_i33tr"),
+"intro": SubResource("Animation_h3mel")
+}
+
+[node name="MainMenu" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8gnq7")
+level1 = ExtResource("2_p15j3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 350.0
+color = Color(0.0235294, 0.0588235, 0.0509804, 0.392157)
+
+[node name="Logo" type="Sprite2D" parent="ColorRect"]
+position = Vector2(45, 55)
+scale = Vector2(3, 3)
+centered = false
+
+[node name="Light Logo" type="Sprite2D" parent="ColorRect/Logo"]
+position = Vector2(0, -40.6667)
+texture = ExtResource("2_ol4eo")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Logo/Light Logo"]
+libraries = {
+"": SubResource("AnimationLibrary_wrb85")
+}
+autoplay = "idle"
+
+[node name="Shadow Logo" type="Sprite2D" parent="ColorRect/Logo"]
+position = Vector2(68, -37.6667)
+texture = ExtResource("3_v8tgb")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Logo/Shadow Logo"]
+libraries = {
+"": SubResource("AnimationLibrary_41xg8")
+}
+autoplay = "idle"
+
+[node name="Logo" type="Sprite2D" parent="ColorRect/Logo"]
+position = Vector2(34.6667, -4.33333)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_nd458")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Logo"]
+libraries = {
+"": SubResource("AnimationLibrary_5ne60")
+}
+autoplay = "intro"
+
+[node name="Option1" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_top = 223.0
+offset_right = 300.0
+offset_bottom = 249.0
+theme_override_colors/font_color = Color(0.92549, 0.964706, 0.956863, 1)
+theme_override_fonts/font = ExtResource("3_11fol")
+theme_override_font_sizes/font_size = 32
+text = "Press Enter To Play"
+horizontal_alignment = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="ColorRect"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ColorRect/ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.490196)
+motion_mirroring = Vector2(0, 900)
+script = ExtResource("6_cxtvo")
+speed = -30
+
+[node name="Background" type="Sprite2D" parent="ColorRect/ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture = ExtResource("7_aylt0")
+centered = false

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://34qo2ai2ym4o"]
+
+[ext_resource type="Script" path="res://Scripts/UI/credit.gd" id="1_1uvpq"]
+[ext_resource type="Script" path="res://Scripts/UI/background.gd" id="1_ojb6x"]
+[ext_resource type="Texture2D" uid="uid://1ubtaxga4cjv" path="res://Sprites/bglevel1.png" id="2_nfoys"]
+
+[node name="Credit" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0235294, 0.0588235, 0.0509804, 0.392157)
+script = ExtResource("1_1uvpq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.490196)
+motion_mirroring = Vector2(0, 350)
+script = ExtResource("1_ojb6x")
+speed = -30
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture = ExtResource("2_nfoys")
+centered = false

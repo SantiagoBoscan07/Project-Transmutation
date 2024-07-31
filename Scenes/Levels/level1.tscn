@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://c87js0orxof28" path="res://Misc/m5x7.ttf" id="4_qfalc"]
 [ext_resource type="PackedScene" uid="uid://efew5cqtfky1" path="res://Scenes/UI/element_manager.tscn" id="5_rxkmw"]
 [ext_resource type="Script" path="res://Scripts/UI/fpscounter.gd" id="6_w7fja"]
-[ext_resource type="Texture2D" uid="uid://cdgriy1hwugjm" path="res://Sprites/bg level 1.png" id="7_67xcf"]
 [ext_resource type="PackedScene" uid="uid://5qgnmnke7lw2" path="res://Scenes/Misc/Spawner.tscn" id="7_oxlmv"]
 [ext_resource type="PackedScene" uid="uid://b8i5detqyc1pt" path="res://Scenes/UI/timer_panel.tscn" id="8_ah8df"]
 [ext_resource type="PackedScene" uid="uid://bkshbhow8ihs1" path="res://Scenes/Items/item.tscn" id="8_n32jl"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://clhdamhhkqes4" path="res://Scenes/Enemy/EnemyAlchemist.tscn" id="10_3tdu4"]
 [ext_resource type="Script" path="res://Scripts/Tutorial/tutorial1.gd" id="10_sg64s"]
 [ext_resource type="Script" path="res://Scripts/UI/background.gd" id="13_ganpy"]
+[ext_resource type="Texture2D" uid="uid://1ubtaxga4cjv" path="res://Sprites/bglevel1.png" id="17_12yqf"]
 [ext_resource type="Script" path="res://Scripts/Misc/levelMusic.gd" id="17_jn1l6"]
 [ext_resource type="Script" path="res://Scripts/UI/levelStart.gd" id="18_8qxtc"]
 
@@ -177,14 +177,14 @@ theme_override_colors/default_color = Color(0.858824, 0, 0, 1)
 script = ExtResource("6_w7fja")
 
 [node name="ItemSpawner" parent="." instance=ExtResource("7_oxlmv")]
-spawnTime = 15.0
+spawnTime = 20.0
 spawnerDuration = 70.0
 objectToSpawn = ExtResource("8_n32jl")
 spawnUp = true
 
 [node name="ItemSpawner2" parent="." instance=ExtResource("7_oxlmv")]
-spawnTime = 25.0
-spawnerDuration = 26.0
+spawnTime = 30.0
+spawnerDuration = 31.0
 objectToSpawn = ExtResource("8_n32jl")
 spawnUp = true
 
@@ -424,7 +424,7 @@ speed = -30
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 modulate = Color(1, 1, 1, 0.196078)
 z_index = -1
-texture = ExtResource("7_67xcf")
+texture = ExtResource("17_12yqf")
 centered = false
 
 [node name="levelMusic" type="Node" parent="."]

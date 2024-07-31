@@ -6,6 +6,5 @@ class_name BarrierHurt
 
 func _ready() -> void:
 	hurtbox.hurt.connect(func(hitbox: Hitbox):
-		if !hitbox.owner.is_in_group("Enemy"):
-			hitbox.owner.queue_free()
+		hitbox.owner.queue_free()
 )
