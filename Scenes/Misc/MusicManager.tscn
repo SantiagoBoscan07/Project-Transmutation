@@ -35,3 +35,9 @@ stream = ExtResource("4_u4okc")
 script = ExtResource("3_6dc5d")
 pitch_min = 0.5
 pitch_max = 0.5
+
+[node name="credit screen" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_u4okc")
+script = ExtResource("3_6dc5d")
+pitch_min = 0.2
+pitch_max = 0.2

@@ -20,3 +20,9 @@ func stopTitleScreen():
 
 func playConfirm():
 	$Sound/confirm.play_with_variance()
+
+func playCredit():
+	$"Music/credit screen".play_with_variance()
+
+func stopCredit():
+	$"Music/credit screen".stop()

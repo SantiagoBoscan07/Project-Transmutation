@@ -26,5 +26,6 @@ func nextLevel():
 	get_tree().change_scene_to_packed(nextScene)
 
 func _on_level_timer_timeout():
-	MusicManager.stopMainTheme()
-	Transition.fadeToBlack()
+	if !Globals.isDead:
+		MusicManager.stopMainTheme()
+		Transition.fadeToBlack()
