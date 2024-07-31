@@ -1,6 +1,6 @@
 extends ColorRect
 
-@export var menu: PackedScene
+var menu: PackedScene = load("res://Scenes/UI/mainMenu.tscn")
 
 func _ready():
 	Transition.fadeToScene()
